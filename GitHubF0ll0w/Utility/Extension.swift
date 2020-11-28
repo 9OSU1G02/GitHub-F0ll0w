@@ -27,11 +27,18 @@ extension UIView {
     
     
     func addSubviews(_ views: UIView...) {
-        
         for view in views {
             addSubview(view)
         }
-        
     }
     
 }
+
+extension UIViewController {
+    func addObservsers(selector: Selector,names: NSNotification.Name..., objcect: Any?) {
+        for name in names {
+            NotificationCenter.default.addObserver(self, selector: selector, name: name, object: objcect)
+        }
+    }
+}
+
