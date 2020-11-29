@@ -31,7 +31,7 @@ class TitleLabel: UILabel {
     
     private func configure() {
 
-        translatesAutoresizingMaskIntoConstraints = true
+        translatesAutoresizingMaskIntoConstraints = false
 
         textColor = .label
         adjustsFontSizeToFitWidth = true

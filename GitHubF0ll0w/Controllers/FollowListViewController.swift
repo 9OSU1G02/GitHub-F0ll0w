@@ -8,7 +8,7 @@
 import UIKit
 
 
-class FollowListViewController: UIViewController {
+class FollowListViewController: DataLoadingViewController {
     
     enum Section {
         case main
@@ -19,6 +19,7 @@ class FollowListViewController: UIViewController {
     var type: FollowType!
     
     var follows: [Follow] = []
+    var filteredFollows: [Follow] = []
     
     var pageNumber = 1
     
@@ -26,7 +27,13 @@ class FollowListViewController: UIViewController {
     
     var collectionView: UICollectionView!
     
-    var dataSoucre: UITableViewDiffableDataSource<Section,Follow>!
+    var dataSoucre: UICollectionViewDiffableDataSource<Section,Follow>!
+    
+    var isLoading = false
+    var isSearching = false
+    var hasMoreFollowers = true
+    
+    var filterd: String = ""
     // MARK: - Inits
     init(username: String, type: FollowType) {
         super.init(nibName: nil, bundle: nil)
@@ -43,17 +50,18 @@ class FollowListViewController: UIViewController {
     // MARK: - View Life cycle
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
         
         view.backgroundColor = .systemPurple
         
         configureController()
         getFollow()
+        configureDataSource()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -62,8 +70,8 @@ class FollowListViewController: UIViewController {
     // MARK: - Configuration
     
     func configureController() {
-        configureSearchController()
         configureViewController()
+        configureSearchController()
         configureCollectionView()
     }
     
@@ -82,9 +90,11 @@ class FollowListViewController: UIViewController {
     }
     
     func configureCollectionView() {
-        
+       
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelpers.createThreeColumnFlowLayout(in: view))
         
+        collectionView.delegate = self
+
         collectionView.backgroundColor = .systemBackground
         
         view.addSubview(collectionView)
@@ -92,7 +102,25 @@ class FollowListViewController: UIViewController {
         collectionView.register(FollowCollectionViewCell.self, forCellWithReuseIdentifier: FollowCollectionViewCell.reuseID)
     }
     
+     func configureDataSource() {
+        dataSoucre = UICollectionViewDiffableDataSource<Section,Follow>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follow) -> UICollectionViewCell? in
+             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowCollectionViewCell.reuseID, for: indexPath) as! FollowCollectionViewCell
+            cell.set(follow: follow)
+            return cell
+        })
+    }
     
+    func updateData(on follows: [Follow]) {
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section,Follow>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(follows)
+        
+        DispatchQueue.main.async {
+            self.dataSoucre.apply(snapshot)
+        }
+        
+    }
     
     // MARK: - Selectors
     
@@ -101,29 +129,85 @@ class FollowListViewController: UIViewController {
     }
     
     
-
-    
     // MARK: - Helpers
-    private func getFollow() {
+     func getFollow() {
+        
         NetworkManager.shared.getFollow(type: type, for: username, page: pageNumber) {[weak self] (result) in
+            
             guard let self = self else { return }
+            
             switch result {
             case .failure(let error):
                 print(error.rawValue)
             case .success(let follows):
-                self.follows = follows
+                self.updateUI(with: follows)
             }
         }
        
     }
     
+    
+    func updateUI(with follows: [Follow]) {
+        
+        if follows.count < 100 { hasMoreFollowers = false }
+        
+        self.follows.append(contentsOf: follows)
+        
+        if self.follows.isEmpty {
+            let message = "This user  doesn't have any followers. Go follow them 😀"
+            DispatchQueue.main.async {
+                self.showEmptySateView(with: message, in: self.view)
+                return
+            }
+        }
+                       
+        isSearching ? updateDataWithFilteredFollows() : self.updateData(on: self.follows)
+                  
+    }
+    
+    func updateDataWithFilteredFollows() {
+        filteredFollows = follows.filter({ (follow) -> Bool in
+            follow.username.lowercased().contains(filterd.lowercased())
+        })
+        updateData(on: filteredFollows)
+    }
 }
-
 // MARK: - Extension
 
-extension FollowListViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        print("")
+extension FollowListViewController: UICollectionViewDelegate {
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let heightOfScrollView = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - heightOfScrollView && hasMoreFollowers {
+            pageNumber += 1
+            getFollow()
+        }
+        
     }
     
 }
+
+extension FollowListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        guard searchController.searchBar.text != nil, !searchController.searchBar.text!.isEmpty else {
+            filteredFollows.removeAll()
+            isSearching = false
+            updateData(on: follows)
+            return
+        }
+        
+        filterd = searchController.searchBar.text!
+       
+        isSearching = true
+        updateDataWithFilteredFollows()
+        
+    }
+    
+}
+
+

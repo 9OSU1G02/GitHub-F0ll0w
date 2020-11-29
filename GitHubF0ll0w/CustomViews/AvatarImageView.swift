@@ -32,7 +32,9 @@ class AvatarImageView: UIImageView {
     func downloadAvatarImage(from url: String) {
         NetworkManager.shared.downloadImage(from: url) {[weak self] (avatarImage) in
             guard let self = self else { return }
-            self.image = avatarImage
+            DispatchQueue.main.async {
+                self.image = avatarImage
+            }
         }
     }
 }

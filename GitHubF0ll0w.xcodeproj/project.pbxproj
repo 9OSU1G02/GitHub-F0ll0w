@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B60EBB2125735F1B002DDB03 /* AlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60EBB2025735F1B002DDB03 /* AlertContainerView.swift */; };
 		B65C600D2572C077008D93C8 /* DataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65C600C2572C077008D93C8 /* DataLoadingViewController.swift */; };
 		B6A8355E2572AB17002C0F9F /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8355D2572AB17002C0F9F /* EmptyStateView.swift */; };
 		B6A835612572AB4D002C0F9F /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A835602572AB4D002C0F9F /* TitleLabel.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B60EBB2025735F1B002DDB03 /* AlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContainerView.swift; sourceTree = "<group>"; };
 		B65C600C2572C077008D93C8 /* DataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadingViewController.swift; sourceTree = "<group>"; };
 		B6A8355D2572AB17002C0F9F /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		B6A835602572AB4D002C0F9F /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				B6DF72752571FE8900F6D28B /* ActionButton.swift */,
 				B6A835602572AB4D002C0F9F /* TitleLabel.swift */,
 				B6A835692572B3D4002C0F9F /* AvatarImageView.swift */,
+				B60EBB2025735F1B002DDB03 /* AlertContainerView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				B6DF72762571FE8900F6D28B /* ActionButton.swift in Sources */,
 				B6BBAFE5257249ED00359AA1 /* Follow.swift in Sources */,
 				B6BBD30125729CD800E009A2 /* CusError.swift in Sources */,
+				B60EBB2125735F1B002DDB03 /* AlertContainerView.swift in Sources */,
 				B6DF72262571E6F500F6D28B /* SceneDelegate.swift in Sources */,
 				B6A835612572AB4D002C0F9F /* TitleLabel.swift in Sources */,
 			);
