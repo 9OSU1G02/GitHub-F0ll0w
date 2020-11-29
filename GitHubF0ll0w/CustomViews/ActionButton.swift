@@ -42,4 +42,9 @@ class ActionButton: UIButton {
 
     }
     
+    func set(background: UIColor, title: String) {
+        self.backgroundColor = background
+        setTitle(title, for: .normal)
+    }
+    
 }

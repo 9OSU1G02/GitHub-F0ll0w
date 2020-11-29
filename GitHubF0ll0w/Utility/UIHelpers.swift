@@ -8,6 +8,7 @@
 import UIKit
 
 enum UIHelpers {
+    
     static func createThreeColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
         
             let width =  view.bounds.width
@@ -21,4 +22,5 @@ enum UIHelpers {
             flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
             return flowLayout
     }
+    
 }

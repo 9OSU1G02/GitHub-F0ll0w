@@ -136,6 +136,7 @@ class SearchViewController: UIViewController {
     
     @objc func pushFollowCollectionVC(_ button: UIButton) {
         guard isUserNameEntered else {
+            presentAlertOnMainThread(title: "Empty Username", message: "Please enter a username. We need to know who to look for 😀", buttonTile: "Ok")
             return
         }
         

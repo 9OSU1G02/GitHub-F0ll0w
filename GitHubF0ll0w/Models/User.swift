@@ -8,7 +8,7 @@
 import Foundation
 
 struct User: Codable {
-    let login: String
+    let username: String
     let avatarUrl: String
     var name: String?
     var location: String?
@@ -19,4 +19,18 @@ struct User: Codable {
     let following: Int
     let createdAt: Date
     let htmlUrl:String
+    
+    enum CodingKeys: String, CodingKey {
+      case username =  "login"
+      case avatarUrl
+      case name
+      case location
+      case bio
+      case publicRepos
+      case publicGists
+      case followers
+      case following
+      case createdAt
+      case htmlUrl
+    }
 }

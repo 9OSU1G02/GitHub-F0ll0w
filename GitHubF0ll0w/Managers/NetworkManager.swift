@@ -12,6 +12,11 @@ enum FollowType: String {
     case following = "following"
 }
 
+enum GithubType: String {
+    case profile = ""
+    case repos = "?tab=repositories"
+}
+
 class NetworkManager {
     
     // MARK: - Properties
@@ -46,7 +51,7 @@ class NetworkManager {
             }
             
             guard let reponse = reponse as? HTTPURLResponse, reponse.statusCode == 200 else {
-                completion(.failure(.invalidReponse))
+                completion(.failure(.invalidUsername))
                 return
             }
             
@@ -68,6 +73,48 @@ class NetworkManager {
         
         task.resume()
         
+    }
+    
+    
+    func getUserInfo(for username: String, completed: @escaping (Result<User,CusError>) -> Void) {
+        let endpoint = baseURL + "\(username)"
+        
+        guard let url = URL(string: endpoint) else {
+            completed(.failure(.invalidUsername))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, reponse, error) in
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            //Check if server reponse HTTP and status code = 200 (success)
+            guard let response = reponse as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidReponse))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                // json created_at is iso8601 format
+                decoder.dateDecodingStrategy = .iso8601
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let user = try decoder.decode(User.self, from: data)
+                completed(.success(user))
+            }
+            catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        
+        task.resume()
     }
     
     func downloadImage(from url: String, completion: @escaping (UIImage?) -> Void) {
@@ -99,5 +146,7 @@ class NetworkManager {
         }
         task.resume()
     }
+    
+    
     
 }

@@ -14,27 +14,27 @@ class FollowListViewController: DataLoadingViewController {
         case main
     }
     // MARK: - Properties
-    var username: String!
+   
     
     var type: FollowType!
-    
     var follows: [Follow] = []
     var filteredFollows: [Follow] = []
     
+    var username: String!
     var pageNumber = 1
+    var filterd: String = ""
     
     var searchController: UISearchController!
-    
     var collectionView: UICollectionView!
-    
     var dataSoucre: UICollectionViewDiffableDataSource<Section,Follow>!
     
     var isLoading = false
     var isSearching = false
     var hasMoreFollowers = true
     
-    var filterd: String = ""
+   
     // MARK: - Inits
+    
     init(username: String, type: FollowType) {
         super.init(nibName: nil, bundle: nil)
         self.username = username
@@ -53,9 +53,9 @@ class FollowListViewController: DataLoadingViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemPurple
-        
+        title = username
         configureController()
-        getFollow()
+        getFollow(type: type, pageNumber: pageNumber)
         configureDataSource()
         
     }
@@ -85,13 +85,17 @@ class FollowListViewController: DataLoadingViewController {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
-        navigationItem.rightBarButtonItem = addButton
+        let bookmarksButton = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .done, target: self, action: #selector(bookmarksButtonTapped))
+        navigationItem.rightBarButtonItem = bookmarksButton
     }
     
     func configureCollectionView() {
        
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelpers.createThreeColumnFlowLayout(in: view))
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: UIHelpers.createThreeColumnFlowLayout(in: view))
+        
+        collectionView.showsVerticalScrollIndicator = false
+        
+        collectionView.alwaysBounceVertical = true
         
         collectionView.delegate = self
 
@@ -124,24 +128,31 @@ class FollowListViewController: DataLoadingViewController {
     
     // MARK: - Selectors
     
-    @objc func addButtonTapped() {
+    @objc func bookmarksButtonTapped() {
         
     }
     
     
     // MARK: - Helpers
-     func getFollow() {
+    func getFollow(type: FollowType, pageNumber: Int) {
+        
+        showLoadingView()
+        isLoading = true
         
         NetworkManager.shared.getFollow(type: type, for: username, page: pageNumber) {[weak self] (result) in
             
             guard let self = self else { return }
             
+            self.dismissLoadingView()
+            
             switch result {
             case .failure(let error):
-                print(error.rawValue)
+                self.presentAlertOnMainThread(title: "Bad Stuff Happend ", message: error.rawValue, buttonTile: "Ok")
             case .success(let follows):
                 self.updateUI(with: follows)
             }
+            
+            self.isLoading = false
         }
        
     }
@@ -154,7 +165,7 @@ class FollowListViewController: DataLoadingViewController {
         self.follows.append(contentsOf: follows)
         
         if self.follows.isEmpty {
-            let message = "This user  doesn't have any followers. Go follow them 😀"
+            let message = "This user  doesn't have any \(type.rawValue). Go follow them 😀"
             DispatchQueue.main.async {
                 self.showEmptySateView(with: message, in: self.view)
                 return
@@ -175,6 +186,16 @@ class FollowListViewController: DataLoadingViewController {
 // MARK: - Extension
 
 extension FollowListViewController: UICollectionViewDelegate {
+        
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let activeArray = isSearching ? filteredFollows : follows
+        let follower = activeArray[indexPath.item]
+        let destinationVC = UserInfoViewController()
+        destinationVC.username = follower.username
+        destinationVC.delegate = self
+        let navVC = UINavigationController(rootViewController: destinationVC)
+        present(navVC, animated: true, completion: nil)
+    }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
@@ -182,9 +203,9 @@ extension FollowListViewController: UICollectionViewDelegate {
         let contentHeight = scrollView.contentSize.height
         let heightOfScrollView = scrollView.frame.size.height
         
-        if offsetY > contentHeight - heightOfScrollView && hasMoreFollowers {
+        if offsetY > contentHeight - heightOfScrollView && hasMoreFollowers  && !isLoading {
             pageNumber += 1
-            getFollow()
+            getFollow(type: type, pageNumber: pageNumber)
         }
         
     }
@@ -201,13 +222,30 @@ extension FollowListViewController: UISearchResultsUpdating {
             return
         }
         
-        filterd = searchController.searchBar.text!
-       
         isSearching = true
+       
+        filterd = searchController.searchBar.text!
         updateDataWithFilteredFollows()
         
     }
     
 }
 
-
+extension FollowListViewController: UserInfoViewControllerDelegate {
+    func didRequestFollow(for username: String, followType: FollowType) {
+        
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        searchController.isActive = false
+        
+        follows.removeAll()
+        filteredFollows.removeAll()
+                
+        self.username   = username
+        title           = username
+        
+        type = followType
+        pageNumber      = 1
+        getFollow(type: type, pageNumber: pageNumber)
+    }
+    
+}
