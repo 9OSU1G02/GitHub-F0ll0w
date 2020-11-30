@@ -10,13 +10,12 @@ import Foundation
 struct Follow: Codable, Hashable {
     var username: String
     var avatarUrl: String
-    let id: Int
     var isAlreadyInFavorite: Bool {
-        return FavoritesManager.idIsAlreadyInFavorites(id: id)
+        return FavoritesManager.isUserAlreadyInFavorites(username: username)
         }
     enum CodingKeys: String, CodingKey {
         case username = "login"
         case avatarUrl = "avatar_url"
-        case id
+        
     }
 }

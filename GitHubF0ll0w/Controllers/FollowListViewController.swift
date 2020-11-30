@@ -14,7 +14,7 @@ class FollowListViewController: DataLoadingViewController {
         case main
     }
     // MARK: - Properties
-   
+    
     
     var type: FollowType!
     var follows: [Follow] = []
@@ -32,7 +32,7 @@ class FollowListViewController: DataLoadingViewController {
     var isSearching = false
     var hasMoreFollowers = true
     
-   
+    
     // MARK: - Inits
     
     init(username: String, type: FollowType) {
@@ -63,6 +63,7 @@ class FollowListViewController: DataLoadingViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        configureBarButtonItem()
     }
     
     
@@ -71,6 +72,7 @@ class FollowListViewController: DataLoadingViewController {
     
     func configureController() {
         configureViewController()
+        configureBarButtonItem()
         configureSearchController()
         configureCollectionView()
     }
@@ -85,12 +87,10 @@ class FollowListViewController: DataLoadingViewController {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        let bookmarksButton = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .done, target: self, action: #selector(bookmarksButtonTapped))
-        navigationItem.rightBarButtonItem = bookmarksButton
     }
     
     func configureCollectionView() {
-       
+        
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: UIHelpers.createThreeColumnFlowLayout(in: view))
         
         collectionView.showsVerticalScrollIndicator = false
@@ -98,7 +98,7 @@ class FollowListViewController: DataLoadingViewController {
         collectionView.alwaysBounceVertical = true
         
         collectionView.delegate = self
-
+        
         collectionView.backgroundColor = .systemBackground
         
         view.addSubview(collectionView)
@@ -106,12 +106,25 @@ class FollowListViewController: DataLoadingViewController {
         collectionView.register(FollowCollectionViewCell.self, forCellWithReuseIdentifier: FollowCollectionViewCell.reuseID)
     }
     
-     func configureDataSource() {
+    func configureDataSource() {
         dataSoucre = UICollectionViewDiffableDataSource<Section,Follow>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follow) -> UICollectionViewCell? in
-             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowCollectionViewCell.reuseID, for: indexPath) as! FollowCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowCollectionViewCell.reuseID, for: indexPath) as! FollowCollectionViewCell
             cell.set(follow: follow)
             return cell
         })
+    }
+    
+    func configureBarButtonItem() {
+        var bookmarksButton = UIBarButtonItem()
+        
+        if FavoritesManager.isUserAlreadyInFavorites(username: username) {
+            bookmarksButton = UIBarButtonItem(image: UIImage(systemName: "bookmark.fill"), style: .done, target: self, action: #selector(bookmarksButtonTapped))
+        }
+        else {
+            bookmarksButton = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .done, target: self, action: #selector(bookmarksButtonTapped))
+        }
+        
+        navigationItem.rightBarButtonItem = bookmarksButton
     }
     
     func updateData(on follows: [Follow]) {
@@ -135,22 +148,27 @@ class FollowListViewController: DataLoadingViewController {
             self.dismissLoadingView()
             switch result {
             case .success(let user):
-                self.addUserToFavorites(user: user)
+                let actionType: FavoritesActionType = FavoritesManager.isUserAlreadyInFavorites(username: user.username) ? .remove : .add
+                self.editUserWithFavorites(user: user,actionType: actionType)
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTile: "Ok")
             }
         }
     }
     
-    func addUserToFavorites(user: User) {
-        let favorite = Follow(username: user.username, avatarUrl: user.avatarUrl, id: user.id)
-        FavoritesManager.updateWith(favorite: favorite, actionType: .add) {[weak self] (error) in
+    func editUserWithFavorites(user: User, actionType: FavoritesActionType) {
+        let favorite = Follow(username: user.username, avatarUrl: user.avatarUrl)
+        FavoritesManager.updateWith(favorite: favorite, actionType: actionType) {[weak self] (error) in
             guard let self = self else { return }
             guard let error = error else {
-                self.presentAlertOnMainThread(title: "Success!", message: "You have successfully favorited this user 🥳", buttonTile: "Ok")
+                let message = actionType == .add ? "You have successfully favorited this user 🥳" : "You have successfully remove this user 🥳"
+                self.presentAlertOnMainThread(title: "Success!", message: message, buttonTile: "Ok")
                 return
             }
             self.presentAlertOnMainThread(title: "Some thing went wrong", message: error.rawValue, buttonTile: "Ok")
+        }
+        DispatchQueue.main.async {
+            self.configureBarButtonItem()
         }
     }
     
@@ -176,7 +194,7 @@ class FollowListViewController: DataLoadingViewController {
             
             self.isLoading = false
         }
-       
+        
     }
     
     
@@ -193,9 +211,9 @@ class FollowListViewController: DataLoadingViewController {
                 return
             }
         }
-                       
+        
         isSearching ? updateDataWithFilteredFollows() : self.updateData(on: self.follows)
-                  
+        
     }
     
     func updateDataWithFilteredFollows() {
@@ -208,7 +226,7 @@ class FollowListViewController: DataLoadingViewController {
 // MARK: - Extension
 
 extension FollowListViewController: UICollectionViewDelegate {
-        
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let activeArray = isSearching ? filteredFollows : follows
         let follower = activeArray[indexPath.item]
@@ -245,7 +263,7 @@ extension FollowListViewController: UISearchResultsUpdating {
         }
         
         isSearching = true
-       
+        
         filterd = searchController.searchBar.text!
         updateDataWithFilteredFollows()
         
@@ -261,7 +279,7 @@ extension FollowListViewController: UserInfoViewControllerDelegate {
         
         follows.removeAll()
         filteredFollows.removeAll()
-                
+        
         self.username   = username
         title           = username
         

@@ -56,17 +56,15 @@ class FavoritesListViewController: DataLoadingViewController {
     }
     
     func updateUI(with favorites: [Follow]) {
+        self.favorites = favorites
         if favorites.isEmpty {
             self.showEmptySateView(with: "No Favorites?\nAdd one on the follower screen", in: self.view)
         }
         else {
-            self.favorites = favorites
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                //show tableview first
-                self.view.bringSubviewToFront(self.tableView)
-            }
+            //show tableview first
+            self.view.bringSubviewToFront(self.tableView)
         }
+        self.tableView.reloadData()
     }
 }
 
@@ -94,6 +92,8 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
             destinationVC.delegate = self
             let navVC = UINavigationController(rootViewController: destinationVC)
             present(navVC, animated: true, completion: nil)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

@@ -25,22 +25,24 @@ class UserInfoViewController: UIViewController {
     weak var delegate: UserInfoViewControllerDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         configureScrollView()
-        configureViewController()
+        configureBarButtonItem()
         layoutUI()
         getUserInfo()
     }
     
-    func configureViewController() {
-        view.backgroundColor = .systemBackground
-        
+    
+    
+    func configureBarButtonItem() {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         navigationItem.leftBarButtonItem = doneButton
         
-        let bookmarkButton = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .done, target: self, action: #selector(dismissVC))
-        navigationItem.rightBarButtonItem = bookmarkButton
+        let bookmarksButton = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .done, target: self, action: #selector(dismissVC))
+        
+        navigationItem.rightBarButtonItem = bookmarksButton
     }
-   
+    
     func getUserInfo() {
        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
            guard let self = self else { return }
@@ -111,9 +113,15 @@ class UserInfoViewController: UIViewController {
         print(childVC.view.frame)
         childVC.didMove(toParent: self)
     }
+    
+
+    
+    // MARK: - Selectors
+    
     @objc func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
+  
 }
 
 // MARK: - Extension
