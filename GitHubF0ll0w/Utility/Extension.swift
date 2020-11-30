@@ -69,3 +69,17 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 }
+
+
+extension UITableView {
+    //Remove blank row in table view
+    func removeExcessCells() {
+        tableFooterView = UIView(frame: .zero)
+    }
+    
+    func reloadDataOnMainThread() {
+        DispatchQueue.main.async {
+            self.reloadData()
+        }
+    }
+}

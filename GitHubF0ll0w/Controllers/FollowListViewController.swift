@@ -129,7 +129,29 @@ class FollowListViewController: DataLoadingViewController {
     // MARK: - Selectors
     
     @objc func bookmarksButtonTapped() {
-        
+        showLoadingView()
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] (result) in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            switch result {
+            case .success(let user):
+                self.addUserToFavorites(user: user)
+            case .failure(let error):
+                self.presentAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTile: "Ok")
+            }
+        }
+    }
+    
+    func addUserToFavorites(user: User) {
+        let favorite = Follow(username: user.username, avatarUrl: user.avatarUrl, id: user.id)
+        FavoritesManager.updateWith(favorite: favorite, actionType: .add) {[weak self] (error) in
+            guard let self = self else { return }
+            guard let error = error else {
+                self.presentAlertOnMainThread(title: "Success!", message: "You have successfully favorited this user 🥳", buttonTile: "Ok")
+                return
+            }
+            self.presentAlertOnMainThread(title: "Some thing went wrong", message: error.rawValue, buttonTile: "Ok")
+        }
     }
     
     

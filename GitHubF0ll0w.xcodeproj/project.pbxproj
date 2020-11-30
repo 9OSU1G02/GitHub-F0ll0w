@@ -19,6 +19,8 @@
 		B6BBAFE5257249ED00359AA1 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BBAFE4257249ED00359AA1 /* Follow.swift */; };
 		B6BBAFE925724AE800359AA1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BBAFE825724AE800359AA1 /* User.swift */; };
 		B6BBD30125729CD800E009A2 /* CusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BBD30025729CD800E009A2 /* CusError.swift */; };
+		B6CA19672574A1E900EDFC43 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA19662574A1E900EDFC43 /* FavoritesManager.swift */; };
+		B6CA196C2574B10900EDFC43 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA196B2574B10900EDFC43 /* FavoritesTableViewCell.swift */; };
 		B6DF6E4C2573A91C00A06F3C /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF6E4B2573A91C00A06F3C /* AlertViewController.swift */; };
 		B6DF6E4F2573AA1600A06F3C /* BodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF6E4E2573AA1600A06F3C /* BodyLabel.swift */; };
 		B6DF6E562573BA0800A06F3C /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF6E552573BA0800A06F3C /* UserInfoViewController.swift */; };
@@ -34,7 +36,7 @@
 		B6DF72302571E6F600F6D28B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DF722E2571E6F600F6D28B /* LaunchScreen.storyboard */; };
 		B6DF725D2571E91F00F6D28B /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF725C2571E91F00F6D28B /* TabBarController.swift */; };
 		B6DF72602571E98000F6D28B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF725F2571E98000F6D28B /* SearchViewController.swift */; };
-		B6DF72632571E9D400F6D28B /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF72622571E9D400F6D28B /* FavoritesViewController.swift */; };
+		B6DF72632571E9D400F6D28B /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF72622571E9D400F6D28B /* FavoritesListViewController.swift */; };
 		B6DF726A2571F0A400F6D28B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF72692571F0A400F6D28B /* Extension.swift */; };
 		B6DF726E2571F53A00F6D28B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF726D2571F53A00F6D28B /* Constant.swift */; };
 		B6DF72722571F73F00F6D28B /* UsernameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF72712571F73F00F6D28B /* UsernameTextField.swift */; };
@@ -54,6 +56,8 @@
 		B6BBAFE4257249ED00359AA1 /* Follow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		B6BBAFE825724AE800359AA1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6BBD30025729CD800E009A2 /* CusError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CusError.swift; sourceTree = "<group>"; };
+		B6CA19662574A1E900EDFC43 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
+		B6CA196B2574B10900EDFC43 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		B6DF6E4B2573A91C00A06F3C /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		B6DF6E4E2573AA1600A06F3C /* BodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyLabel.swift; sourceTree = "<group>"; };
 		B6DF6E552573BA0800A06F3C /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +75,7 @@
 		B6DF72312571E6F600F6D28B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6DF725C2571E91F00F6D28B /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		B6DF725F2571E98000F6D28B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		B6DF72622571E9D400F6D28B /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		B6DF72622571E9D400F6D28B /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
 		B6DF72692571F0A400F6D28B /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B6DF726D2571F53A00F6D28B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B6DF72712571F73F00F6D28B /* UsernameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameTextField.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				B6BBAFDF2572483A00359AA1 /* NetworkManager.swift */,
+				B6CA19662574A1E900EDFC43 /* FavoritesManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -106,12 +111,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		B6CA196A2574B0EB00EDFC43 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B6A835662572B27B002C0F9F /* FollowCollectionViewCell.swift */,
+				B6CA196B2574B10900EDFC43 /* FavoritesTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		B6DF6E512573B8B400A06F3C /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				B6DF725C2571E91F00F6D28B /* TabBarController.swift */,
 				B6DF725F2571E98000F6D28B /* SearchViewController.swift */,
-				B6DF72622571E9D400F6D28B /* FavoritesViewController.swift */,
+				B6DF72622571E9D400F6D28B /* FavoritesListViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -187,6 +201,7 @@
 		B6DF72702571F6E700F6D28B /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				B6CA196A2574B0EB00EDFC43 /* Cells */,
 				B6DF72712571F73F00F6D28B /* UsernameTextField.swift */,
 				B6DF72752571FE8900F6D28B /* ActionButton.swift */,
 				B6A835602572AB4D002C0F9F /* TitleLabel.swift */,
@@ -194,7 +209,6 @@
 				B60EBB2025735F1B002DDB03 /* AlertContainerView.swift */,
 				B6DF6E4E2573AA1600A06F3C /* BodyLabel.swift */,
 				B6A8355D2572AB17002C0F9F /* EmptyStateView.swift */,
-				B6A835662572B27B002C0F9F /* FollowCollectionViewCell.swift */,
 				B6DF6E652573C0D300A06F3C /* SecondaryTitleLabel.swift */,
 				B6DF6E682573C4C700A06F3C /* ItemInfoView.swift */,
 			);
@@ -283,13 +297,15 @@
 				B65C600D2572C077008D93C8 /* DataLoadingViewController.swift in Sources */,
 				B6DF72722571F73F00F6D28B /* UsernameTextField.swift in Sources */,
 				B6DF6E4C2573A91C00A06F3C /* AlertViewController.swift in Sources */,
+				B6CA196C2574B10900EDFC43 /* FavoritesTableViewCell.swift in Sources */,
 				B6DF72242571E6F500F6D28B /* AppDelegate.swift in Sources */,
 				B6BBAFE925724AE800359AA1 /* User.swift in Sources */,
 				B6A8356A2572B3D4002C0F9F /* AvatarImageView.swift in Sources */,
 				B6DF726A2571F0A400F6D28B /* Extension.swift in Sources */,
 				B6DF6E692573C4C700A06F3C /* ItemInfoView.swift in Sources */,
 				B6A8355E2572AB17002C0F9F /* EmptyStateView.swift in Sources */,
-				B6DF72632571E9D400F6D28B /* FavoritesViewController.swift in Sources */,
+				B6DF72632571E9D400F6D28B /* FavoritesListViewController.swift in Sources */,
+				B6CA19672574A1E900EDFC43 /* FavoritesManager.swift in Sources */,
 				B6BBAFDC2572445E00359AA1 /* UIHelpers.swift in Sources */,
 				B6BBAFD525722E0400359AA1 /* FollowListViewController.swift in Sources */,
 				B6DF6E5D2573BA9300A06F3C /* ItemInfoViewController.swift in Sources */,

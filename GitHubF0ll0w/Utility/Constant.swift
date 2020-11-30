@@ -46,3 +46,5 @@ enum DeviceTypes {
         return isiPhoneX || isiPhoneXsMaxAndXr
     }
 }
+
+let KEY_FAVORITES = "favorites"
