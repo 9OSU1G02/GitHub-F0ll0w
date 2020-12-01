@@ -24,23 +24,23 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .systemBackground
-        
         layoutUI()
-        listenForKeyboardNotification()
         setupDismissKeyBoardTapGesture()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.setNavigationBarHidden(true, animated: true)
-        
+        listenForKeyboardNotification()
         userNameTextFiled.text = ""
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        stopListenForKeyboardNotification()
+    }
     
     private func layoutUI() {
         
@@ -51,6 +51,7 @@ class SearchViewController: UIViewController {
         configureButton()
         
     }
+    
     
     // MARK: - Configuration
     
@@ -125,6 +126,12 @@ class SearchViewController: UIViewController {
                       objcect: nil)
     }
     
+    private func stopListenForKeyboardNotification() {
+        removeObservers(names: UIResponder.keyboardWillShowNotification,
+                        UIResponder.keyboardWillHideNotification,
+                        UIResponder.keyboardWillChangeFrameNotification,
+                        objcect: nil)
+    }
     // MARK: - Helpers
     
     private func setupDismissKeyBoardTapGesture() {

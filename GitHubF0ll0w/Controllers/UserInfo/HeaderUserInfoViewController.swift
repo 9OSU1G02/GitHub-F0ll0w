@@ -39,6 +39,7 @@ class HeaderUserInfoViewController: UIViewController {
         configureUIElements()
     }
     
+    
     func configureUIElements() {
         avatarImageView.downloadAvatarImage(from: user.avatarUrl)
         usernameLabel.text          = user.username

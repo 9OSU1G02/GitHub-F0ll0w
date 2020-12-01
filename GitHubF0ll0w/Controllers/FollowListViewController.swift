@@ -66,8 +66,6 @@ class FollowListViewController: DataLoadingViewController {
         configureBarButtonItem()
     }
     
-    
-    
     // MARK: - Configuration
     
     func configureController() {
@@ -191,8 +189,6 @@ extension FollowListViewController: UICollectionViewDelegate {
         let destinationVC = UserInfoViewController()
         destinationVC.username = follower.username
         destinationVC.delegate = self
-//        let navVC = UINavigationController(rootViewController: destinationVC)
-//        present(navVC, animated: true, completion: nil)
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     

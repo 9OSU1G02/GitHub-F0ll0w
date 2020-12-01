@@ -48,3 +48,5 @@ enum DeviceTypes {
 }
 
 let KEY_FAVORITES = "favorites"
+
+let FAVORITES_CHANGE_NOTIFICATION = "favoritesNotification"

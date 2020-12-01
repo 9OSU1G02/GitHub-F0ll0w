@@ -47,6 +47,7 @@ class ItemInfoViewController: UIViewController {
         stackViewButton.spacing = 20
     }
     
+    
     private func configureActionButton() {
         actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         actionButton2.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)

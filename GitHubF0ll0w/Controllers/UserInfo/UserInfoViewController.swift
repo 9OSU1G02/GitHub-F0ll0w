@@ -22,6 +22,7 @@ class UserInfoViewController: DataLoadingViewController {
     let itemViewTwo = UIView()
     var itemViews : [UIView] = []
     let dateLabel = BodyLabel(textAlignment: .center)
+    
     weak var delegate: UserInfoViewControllerDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,12 @@ class UserInfoViewController: DataLoadingViewController {
         configureBarButtonItem()
         layoutUI()
         getUserInfo()
+        setUpListenForFavoritesChange()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        removeObservers(names: Notification.Name(FAVORITES_CHANGE_NOTIFICATION), objcect: nil)
     }
     
     
@@ -74,6 +81,15 @@ class UserInfoViewController: DataLoadingViewController {
             contentView.heightAnchor.constraint(equalToConstant: 600)
 ])
     }
+    
+    func setUpListenForFavoritesChange() {
+        NotificationCenter.default.addObserver(forName: Notification.Name(FAVORITES_CHANGE_NOTIFICATION), object: nil, queue: .main) { [weak self](_) in
+            DispatchQueue.main.async {
+                self?.configureBarButtonItem()
+            }
+        }
+    }
+    
     
     func layoutUI() {
         itemViews = [headerView,itemViewOne,itemViewTwo,dateLabel]

@@ -65,10 +65,12 @@ enum FavoritesManager {
     
     
     static func save(favorites: [Follow]) -> CusError? {
+        
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(favorites)
             UserDefaults.standard.setValue(data, forKey: KEY_FAVORITES)
+            NotificationCenter.default.post(name: Notification.Name(FAVORITES_CHANGE_NOTIFICATION), object: nil)
             return nil
         } catch {
             return .unableToFavorite
@@ -76,6 +78,7 @@ enum FavoritesManager {
     }
     
     static func isUserAlreadyInFavorites(username: String) -> Bool {
+        
         var isAlreadyInFavorites = false
         retrieveFavorites { (result) in
             switch result {

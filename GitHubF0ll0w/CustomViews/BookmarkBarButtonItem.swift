@@ -9,7 +9,7 @@ import UIKit
 
 class BookmarkBarButtonItem: UIBarButtonItem {
     var username: String!
-    var vc: DataLoadingViewController!
+    weak var vc: DataLoadingViewController!
     
    
     init(for username: String, in vc: DataLoadingViewController) {

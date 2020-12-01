@@ -42,6 +42,12 @@ extension UIViewController {
         }
     }
     
+    func removeObservers(names: NSNotification.Name..., objcect: Any?) {
+        for name in names {
+            NotificationCenter.default.removeObserver(self, name: name, object: objcect)
+        }
+    }
+    
     func  presentAlertOnMainThread(title: String, message: String, buttonTile: String) {
         DispatchQueue.main.async {
             let alertVC = AlertViewController(title: title, message: message, buttonTitle: buttonTile)

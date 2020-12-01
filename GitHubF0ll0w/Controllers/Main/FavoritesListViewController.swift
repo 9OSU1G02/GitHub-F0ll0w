@@ -24,6 +24,8 @@ class FavoritesListViewController: DataLoadingViewController {
         getFovorites()
     }
     
+    
+    
     // MARK: - Configuration
     func configureViewController() {
         view.backgroundColor = .systemBackground

@@ -42,5 +42,5 @@ class FollowItemViewController: ItemInfoViewController {
         
         delegate.didTapGetFollow(for: user, type: type)
     }
-  
+    
 }
