@@ -42,24 +42,24 @@ class UserInfoViewController: DataLoadingViewController {
     
     
     func configureBarButtonItem() {
-
+        
         let bookmarksButton = BookmarkBarButtonItem(for: username, in: self)
         navigationItem.rightBarButtonItem = bookmarksButton
     }
     
     func getUserInfo() {
-       NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-           guard let self = self else { return }
-           switch result {
-           case .success(let user):
-               DispatchQueue.main.async {
-                self.configureUIElements(with: user)
-               }
-           case .failure(let error):
-               self.presentAlertOnMainThread(title: "Some thing went wrong", message: error.rawValue, buttonTile: "Ok")
-           }
-       }
-   }
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let user):
+                DispatchQueue.main.async {
+                    self.configureUIElements(with: user)
+                }
+            case .failure(let error):
+                self.presentAlertOnMainThread(title: "Some thing went wrong", message: error.rawValue, buttonTile: "Ok")
+            }
+        }
+    }
     
     func configureUIElements(with user: User) {
         self.add(childVC: HeaderUserInfoViewController(user: user), to: headerView)
@@ -79,7 +79,7 @@ class UserInfoViewController: DataLoadingViewController {
         NSLayoutConstraint.activate([
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(equalToConstant: 600)
-])
+        ])
     }
     
     func setUpListenForFavoritesChange() {
@@ -110,8 +110,8 @@ class UserInfoViewController: DataLoadingViewController {
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             itemViewOne.heightAnchor.constraint(equalToConstant: itemheight),
             
-           itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: padding),
-           itemViewTwo.heightAnchor.constraint(equalToConstant: itemheight),
+            itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: padding),
+            itemViewTwo.heightAnchor.constraint(equalToConstant: itemheight),
             
             dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
             dateLabel.heightAnchor.constraint(equalToConstant: 50)
@@ -125,14 +125,14 @@ class UserInfoViewController: DataLoadingViewController {
         childVC.view.frame = containerView.bounds
         childVC.didMove(toParent: self)
     }
-
+    
     
     // MARK: - Selectors
     
     @objc func dismissVC() {
         navigationController?.popViewController(animated: true)
     }
-  
+    
 }
 
 // MARK: - Extension
@@ -147,9 +147,21 @@ extension UserInfoViewController: RepoViewControllerDelegate, FollowItemViewCont
     }
     
     func didTapGetFollow(for user: User, type: FollowType) {
-        guard user.followers != 0 else { presentAlertOnMainThread(title: "No followers", message: "This user has no followers. What a shame 🙁", buttonTile: "So sad")
+        
+        var follow = 0
+        
+        switch type {
+        
+        case .follower:
+            follow = user.followers
+        case .following:
+            follow = user.following
+        }
+        
+        guard follow != 0 else { presentAlertOnMainThread(title: "No \(type.rawValue)", message: "This user has no \(type.rawValue). What a shame 🙁", buttonTile: "So sad")
             return
         }
+        
         dismissVC()
         delegate.didRequestFollow(for: user.username, followType: type)
     }
