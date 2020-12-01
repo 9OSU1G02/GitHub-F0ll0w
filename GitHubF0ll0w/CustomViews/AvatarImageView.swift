@@ -11,7 +11,7 @@ class AvatarImageView: UIImageView {
 
     
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         configure()
     }
     

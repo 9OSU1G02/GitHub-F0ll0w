@@ -11,7 +11,7 @@ protocol UserInfoViewControllerDelegate: class {
     func didRequestFollow(for username: String, followType: FollowType)
 }
 
-class UserInfoViewController: UIViewController {
+class UserInfoViewController: DataLoadingViewController {
     
     
     let scrollView = UIScrollView()
@@ -35,11 +35,8 @@ class UserInfoViewController: UIViewController {
     
     
     func configureBarButtonItem() {
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
-        navigationItem.leftBarButtonItem = doneButton
-        
-        let bookmarksButton = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .done, target: self, action: #selector(dismissVC))
-        
+
+        let bookmarksButton = BookmarkBarButtonItem(for: username, in: self)
         navigationItem.rightBarButtonItem = bookmarksButton
     }
     
@@ -110,16 +107,14 @@ class UserInfoViewController: UIViewController {
         containerView.addSubview(childVC.view)
         //child VC fill up entire containerView
         childVC.view.frame = containerView.bounds
-        print(childVC.view.frame)
         childVC.didMove(toParent: self)
     }
-    
 
     
     // MARK: - Selectors
     
     @objc func dismissVC() {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
   
 }
@@ -139,8 +134,7 @@ extension UserInfoViewController: RepoViewControllerDelegate, FollowItemViewCont
         guard user.followers != 0 else { presentAlertOnMainThread(title: "No followers", message: "This user has no followers. What a shame 🙁", buttonTile: "So sad")
             return
         }
-        delegate.didRequestFollow(for: user.username, followType: type)
         dismissVC()
+        delegate.didRequestFollow(for: user.username, followType: type)
     }
-    
 }

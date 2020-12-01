@@ -86,14 +86,13 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
     // MARK: - TableView Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favorite = favorites[indexPath.row]
-            let destinationVC = UserInfoViewController()
-            destinationVC.username = favorite.username
-            destinationVC.delegate = self
-            let navVC = UINavigationController(rootViewController: destinationVC)
-            present(navVC, animated: true, completion: nil)
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        let favorite = favorites[indexPath.row]
+        
+        let destinationVC = UserInfoViewController()
+        destinationVC.username = favorite.username
+        destinationVC.delegate = self
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

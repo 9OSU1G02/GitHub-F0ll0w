@@ -115,16 +115,7 @@ class FollowListViewController: DataLoadingViewController {
     }
     
     func configureBarButtonItem() {
-        var bookmarksButton = UIBarButtonItem()
-        
-        if FavoritesManager.isUserAlreadyInFavorites(username: username) {
-            bookmarksButton = UIBarButtonItem(image: UIImage(systemName: "bookmark.fill"), style: .done, target: self, action: #selector(bookmarksButtonTapped))
-        }
-        else {
-            bookmarksButton = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .done, target: self, action: #selector(bookmarksButtonTapped))
-        }
-        
-        navigationItem.rightBarButtonItem = bookmarksButton
+        navigationItem.rightBarButtonItem = BookmarkBarButtonItem(for: username, in: self)
     }
     
     func updateData(on follows: [Follow]) {
@@ -137,39 +128,6 @@ class FollowListViewController: DataLoadingViewController {
             self.dataSoucre.apply(snapshot)
         }
         
-    }
-    
-    // MARK: - Selectors
-    
-    @objc func bookmarksButtonTapped() {
-        showLoadingView()
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] (result) in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            switch result {
-            case .success(let user):
-                let actionType: FavoritesActionType = FavoritesManager.isUserAlreadyInFavorites(username: user.username) ? .remove : .add
-                self.editUserWithFavorites(user: user,actionType: actionType)
-            case .failure(let error):
-                self.presentAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTile: "Ok")
-            }
-        }
-    }
-    
-    func editUserWithFavorites(user: User, actionType: FavoritesActionType) {
-        let favorite = Follow(username: user.username, avatarUrl: user.avatarUrl)
-        FavoritesManager.updateWith(favorite: favorite, actionType: actionType) {[weak self] (error) in
-            guard let self = self else { return }
-            guard let error = error else {
-                let message = actionType == .add ? "You have successfully favorited this user 🥳" : "You have successfully remove this user 🥳"
-                self.presentAlertOnMainThread(title: "Success!", message: message, buttonTile: "Ok")
-                return
-            }
-            self.presentAlertOnMainThread(title: "Some thing went wrong", message: error.rawValue, buttonTile: "Ok")
-        }
-        DispatchQueue.main.async {
-            self.configureBarButtonItem()
-        }
     }
     
     
@@ -233,8 +191,9 @@ extension FollowListViewController: UICollectionViewDelegate {
         let destinationVC = UserInfoViewController()
         destinationVC.username = follower.username
         destinationVC.delegate = self
-        let navVC = UINavigationController(rootViewController: destinationVC)
-        present(navVC, animated: true, completion: nil)
+//        let navVC = UINavigationController(rootViewController: destinationVC)
+//        present(navVC, animated: true, completion: nil)
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

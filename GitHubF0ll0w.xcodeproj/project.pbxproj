@@ -21,6 +21,7 @@
 		B6BBD30125729CD800E009A2 /* CusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BBD30025729CD800E009A2 /* CusError.swift */; };
 		B6CA19672574A1E900EDFC43 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA19662574A1E900EDFC43 /* FavoritesManager.swift */; };
 		B6CA196C2574B10900EDFC43 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA196B2574B10900EDFC43 /* FavoritesTableViewCell.swift */; };
+		B6D721562575F1FB008DA359 /* BookmarkBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D721552575F1FB008DA359 /* BookmarkBarButtonItem.swift */; };
 		B6DF6E4C2573A91C00A06F3C /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF6E4B2573A91C00A06F3C /* AlertViewController.swift */; };
 		B6DF6E4F2573AA1600A06F3C /* BodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF6E4E2573AA1600A06F3C /* BodyLabel.swift */; };
 		B6DF6E562573BA0800A06F3C /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF6E552573BA0800A06F3C /* UserInfoViewController.swift */; };
@@ -58,6 +59,7 @@
 		B6BBD30025729CD800E009A2 /* CusError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CusError.swift; sourceTree = "<group>"; };
 		B6CA19662574A1E900EDFC43 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		B6CA196B2574B10900EDFC43 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		B6D721552575F1FB008DA359 /* BookmarkBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkBarButtonItem.swift; sourceTree = "<group>"; };
 		B6DF6E4B2573A91C00A06F3C /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		B6DF6E4E2573AA1600A06F3C /* BodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyLabel.swift; sourceTree = "<group>"; };
 		B6DF6E552573BA0800A06F3C /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				B6A8355D2572AB17002C0F9F /* EmptyStateView.swift */,
 				B6DF6E652573C0D300A06F3C /* SecondaryTitleLabel.swift */,
 				B6DF6E682573C4C700A06F3C /* ItemInfoView.swift */,
+				B6D721552575F1FB008DA359 /* BookmarkBarButtonItem.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6D721562575F1FB008DA359 /* BookmarkBarButtonItem.swift in Sources */,
 				B6DF6E4F2573AA1600A06F3C /* BodyLabel.swift in Sources */,
 				B6DF6E562573BA0800A06F3C /* UserInfoViewController.swift in Sources */,
 				B6DF6E602573BB7500A06F3C /* RepoViewController.swift in Sources */,

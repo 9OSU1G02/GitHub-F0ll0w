@@ -45,7 +45,7 @@ extension UIViewController {
     func  presentAlertOnMainThread(title: String, message: String, buttonTile: String) {
         DispatchQueue.main.async {
             let alertVC = AlertViewController(title: title, message: message, buttonTitle: buttonTile)
-            alertVC.modalPresentationStyle = .overFullScreen
+            alertVC.modalPresentationStyle = .pageSheet
             //When User click Ok view will slowly dissolve not instant disappear
             alertVC.modalTransitionStyle = .coverVertical
             //like push when in navigation
