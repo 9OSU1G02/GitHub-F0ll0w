@@ -8,7 +8,8 @@
 import UIKit
 
 class SecondaryTitleLabel: UILabel {
-
+    
+    // MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -24,6 +25,7 @@ class SecondaryTitleLabel: UILabel {
         configure()
     }
     
+    // MARK: - Config
     private func configure() {
         textColor = .label
         adjustsFontSizeToFitWidth = true

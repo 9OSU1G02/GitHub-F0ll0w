@@ -9,9 +9,11 @@ import UIKit
 
 class EmptyStateView: UIView {
 
-   
+    // MARK: - Properties
     let messageLabel = TitleLabel(textAlignment: .center, fontSize: 28)
     let logoImageView = UIImageView()
+    
+    // MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews(messageLabel,logoImageView)
@@ -27,6 +29,8 @@ class EmptyStateView: UIView {
         self.init(frame: .zero)
         messageLabel.text = message
     }
+    
+    // MARK: - Config
     private func configure() {
         configureLabelImageView()
         configureMessagLabel()

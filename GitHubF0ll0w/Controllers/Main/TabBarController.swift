@@ -8,13 +8,15 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-
+    
+    // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         UITabBar.appearance().tintColor = .systemGreen
        viewControllers = [createSearchNavigationViewController(),createFavoritesNavigationViewController()]
     }
     
+    // MARK: - Helpers
     
     func createSearchNavigationViewController() -> UINavigationController {
         let searchVC = SearchViewController()

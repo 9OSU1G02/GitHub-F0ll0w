@@ -8,13 +8,18 @@
 import UIKit
 
 class DataLoadingViewController: UIViewController {
+    // MARK: - Properties
+    
     var containerView: UIView!
+    
+    // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
+    // MARK: - Helpers
     func showLoadingView() {
         
         containerView = UIView(frame: view.bounds)

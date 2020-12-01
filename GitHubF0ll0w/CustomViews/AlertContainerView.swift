@@ -8,7 +8,8 @@
 import UIKit
 
 class AlertContainerView: UIView {
-
+    
+    // MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -18,6 +19,7 @@ class AlertContainerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Config
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 16

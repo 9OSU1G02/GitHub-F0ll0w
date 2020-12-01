@@ -8,7 +8,8 @@
 import UIKit
 
 class BodyLabel: UILabel {
-
+    
+    // MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -23,6 +24,7 @@ class BodyLabel: UILabel {
         self.textAlignment = textAlignment
     }
     
+    // MARK: - Config
     private func configure() {
         
         translatesAutoresizingMaskIntoConstraints = false

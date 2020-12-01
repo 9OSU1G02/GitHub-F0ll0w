@@ -8,10 +8,15 @@
 import UIKit
 
 class FavoritesListViewController: DataLoadingViewController {
-
+    
+    // MARK: - Properties
+    
     let tableView = UITableView()
     var favorites : [Follow] = []
+    
+    
     // MARK: - View LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
@@ -25,8 +30,8 @@ class FavoritesListViewController: DataLoadingViewController {
     }
     
     
-    
     // MARK: - Configuration
+    
     func configureViewController() {
         view.backgroundColor = .systemBackground
         title = "Favorites"
@@ -73,7 +78,10 @@ class FavoritesListViewController: DataLoadingViewController {
 // MARK: - Extension
 
 extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    
     // MARK: - TableView DataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return favorites.count
     }
@@ -84,6 +92,7 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
         cell.set(favorite: favorite)
         return cell
     }
+    
     
     // MARK: - TableView Delegate
     
@@ -97,9 +106,11 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
+    
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else {
@@ -116,6 +127,8 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
         }
     }
 }
+
+// MARK: - Extension
 
 extension FavoritesListViewController: UserInfoViewControllerDelegate {
     func didRequestFollow(for username: String, followType: FollowType) {

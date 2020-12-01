@@ -8,10 +8,11 @@
 import UIKit
 
 class BookmarkBarButtonItem: UIBarButtonItem {
+    // MARK: - Properties
     var username: String!
     weak var vc: DataLoadingViewController!
     
-   
+   // MARK: - Inits
     init(for username: String, in vc: DataLoadingViewController) {
         super.init()
         self.username = username
@@ -23,6 +24,7 @@ class BookmarkBarButtonItem: UIBarButtonItem {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Config
     func configureBarButtonItem() {
         let imageSystemName = FavoritesManager.isUserAlreadyInFavorites(username: username) ? "bookmark.fill" : "bookmark"
         image = UIImage(systemName: imageSystemName)
@@ -31,7 +33,7 @@ class BookmarkBarButtonItem: UIBarButtonItem {
         action = #selector(bookmarksButtonTapped)
     }
     
-    
+    // MARK: - Selectors
     @objc func bookmarksButtonTapped() {
         vc.showLoadingView()
         NetworkManager.shared.getUserInfo(for: username) { [weak self] (result) in
@@ -47,7 +49,7 @@ class BookmarkBarButtonItem: UIBarButtonItem {
         }
     }
     
-    
+    // MARK: - Helpers
     func editUserWithFavorites(user: User, actionType: FavoritesActionType) {
         let favorite = Follow(username: user.username, avatarUrl: user.avatarUrl)
         FavoritesManager.updateWith(favorite: favorite, actionType: actionType) {[weak self] (error) in

@@ -13,7 +13,7 @@ protocol UserInfoViewControllerDelegate: class {
 
 class UserInfoViewController: DataLoadingViewController {
     
-    
+    // MARK: - Properties
     let scrollView = UIScrollView()
     let contentView = UIView()
     var username: String!
@@ -24,6 +24,8 @@ class UserInfoViewController: DataLoadingViewController {
     let dateLabel = BodyLabel(textAlignment: .center)
     
     weak var delegate: UserInfoViewControllerDelegate!
+    
+    // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -36,30 +38,18 @@ class UserInfoViewController: DataLoadingViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        removeObservers(names: Notification.Name(FAVORITES_CHANGE_NOTIFICATION), objcect: nil)
+        stopListenForFavoritesChange()
     }
     
     
+    // MARK: - Configure
     
     func configureBarButtonItem() {
         
         let bookmarksButton = BookmarkBarButtonItem(for: username, in: self)
         navigationItem.rightBarButtonItem = bookmarksButton
     }
-    
-    func getUserInfo() {
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let user):
-                DispatchQueue.main.async {
-                    self.configureUIElements(with: user)
-                }
-            case .failure(let error):
-                self.presentAlertOnMainThread(title: "Some thing went wrong", message: error.rawValue, buttonTile: "Ok")
-            }
-        }
-    }
+        
     
     func configureUIElements(with user: User) {
         self.add(childVC: HeaderUserInfoViewController(user: user), to: headerView)
@@ -82,10 +72,33 @@ class UserInfoViewController: DataLoadingViewController {
         ])
     }
     
+    
+    // MARK: - Notification
     func setUpListenForFavoritesChange() {
         NotificationCenter.default.addObserver(forName: Notification.Name(FAVORITES_CHANGE_NOTIFICATION), object: nil, queue: .main) { [weak self](_) in
             DispatchQueue.main.async {
                 self?.configureBarButtonItem()
+            }
+        }
+    }
+    
+    
+    func stopListenForFavoritesChange() {
+        removeObservers(names: Notification.Name(FAVORITES_CHANGE_NOTIFICATION), objcect: nil)
+    }
+    
+    
+    // MARK: - Helpres
+    func getUserInfo() {
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let user):
+                DispatchQueue.main.async {
+                    self.configureUIElements(with: user)
+                }
+            case .failure(let error):
+                self.presentAlertOnMainThread(title: "Some thing went wrong", message: error.rawValue, buttonTile: "Ok")
             }
         }
     }
@@ -118,6 +131,7 @@ class UserInfoViewController: DataLoadingViewController {
         ])
     }
     
+    
     func add(childVC: UIViewController, to containerView: UIView) {
         addChild(childVC)
         containerView.addSubview(childVC.view)
@@ -128,7 +142,6 @@ class UserInfoViewController: DataLoadingViewController {
     
     
     // MARK: - Selectors
-    
     @objc func dismissVC() {
         navigationController?.popViewController(animated: true)
     }

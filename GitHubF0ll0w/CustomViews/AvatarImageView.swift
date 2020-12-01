@@ -9,7 +9,7 @@ import UIKit
 
 class AvatarImageView: UIImageView {
 
-    
+    // MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -19,6 +19,8 @@ class AvatarImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Config
     private func configure() {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -29,6 +31,7 @@ class AvatarImageView: UIImageView {
         
     }
     
+    // MARK: - Helpers
     func downloadAvatarImage(from url: String) {
         NetworkManager.shared.downloadImage(from: url) {[weak self] (avatarImage) in
             guard let self = self else { return }

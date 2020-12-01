@@ -103,7 +103,7 @@ class NetworkManager {
             
             do {
                 let decoder = JSONDecoder()
-                // json created_at is iso8601 format
+                // json createdAt is iso8601 format
                 decoder.dateDecodingStrategy = .iso8601
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let user = try decoder.decode(User.self, from: data)
@@ -113,7 +113,6 @@ class NetworkManager {
                 completed(.failure(.invalidData))
             }
         }
-        
         task.resume()
     }
     
@@ -146,7 +145,5 @@ class NetworkManager {
         }
         task.resume()
     }
-    
-    
     
 }

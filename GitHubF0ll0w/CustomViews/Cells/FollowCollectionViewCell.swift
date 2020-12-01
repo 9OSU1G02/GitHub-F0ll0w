@@ -26,22 +26,14 @@ class FollowCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    func set(follow: Follow) {
-        
-        usernameLabel.text = follow.username
-        avatarImageView.downloadAvatarImage(from: follow.avatarUrl)
-        
-    }
-    
-    
+    // MARK: - Config
     private func configure() {
         
         addSubviews(avatarImageView,
                     usernameLabel)
         
         let padding: CGFloat = 8
-       
+        
         NSLayoutConstraint.activate([
             
             avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
@@ -53,6 +45,13 @@ class FollowCollectionViewCell: UICollectionViewCell {
             usernameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             usernameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             usernameLabel.heightAnchor.constraint(equalToConstant: 20)
-])
+        ])
     }
+    // MARK: - Helpers
+    
+    func set(follow: Follow) {
+        usernameLabel.text = follow.username
+        avatarImageView.downloadAvatarImage(from: follow.avatarUrl)
+    }
+    
 }

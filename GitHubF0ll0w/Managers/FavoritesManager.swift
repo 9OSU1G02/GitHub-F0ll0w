@@ -81,8 +81,8 @@ enum FavoritesManager {
         
         var isAlreadyInFavorites = false
         retrieveFavorites { (result) in
-            switch result {
             
+            switch result {
             case .failure(_):
                 isAlreadyInFavorites = false
             case .success(let favorites):
@@ -92,8 +92,8 @@ enum FavoritesManager {
                         break
                     }
                 }
-                
             }
+            
         }
         return isAlreadyInFavorites
     }

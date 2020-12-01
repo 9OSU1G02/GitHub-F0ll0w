@@ -10,6 +10,7 @@ import UIKit
 
 
 class ItemInfoViewController: UIViewController {
+    // MARK: - Properties
     
     let stackViewLabel  = UIStackView()
     let stackViewButton = UIStackView()
@@ -18,6 +19,9 @@ class ItemInfoViewController: UIViewController {
     let actionButton    = ActionButton()
     let actionButton2   = ActionButton()
     var user: User!
+    
+    // MARK: - View DidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackgroundView()
@@ -27,6 +31,7 @@ class ItemInfoViewController: UIViewController {
     }
     
     
+    // MARK: - Config
     
     private func configureBackgroundView() {
         view.layer.cornerRadius = 18
@@ -53,9 +58,13 @@ class ItemInfoViewController: UIViewController {
         actionButton2.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
     }
     
+    // MARK: - Selectors
     @objc func actionButtonTapped(_ button: UIButton) { }
     
+    // MARK: - Selectors
+    
     private func layoutUI() {
+        
         view.addSubviews(stackViewLabel,stackViewButton)
         stackViewLabel.translatesAutoresizingMaskIntoConstraints = false
         stackViewButton.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +72,7 @@ class ItemInfoViewController: UIViewController {
         
         
         NSLayoutConstraint.activate([
+            
             stackViewLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
             stackViewLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             stackViewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
@@ -73,7 +83,7 @@ class ItemInfoViewController: UIViewController {
             stackViewButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             stackViewButton.heightAnchor.constraint(equalToConstant: 44),
             
-
         ])
     }
+    
 }

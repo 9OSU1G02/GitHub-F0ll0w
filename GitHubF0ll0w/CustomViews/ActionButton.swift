@@ -8,7 +8,8 @@
 import UIKit
 
 class ActionButton: UIButton {
-
+    
+    // MARK: - Inits
     override init(frame: CGRect) {
 
         super.init(frame: frame)
@@ -30,7 +31,7 @@ class ActionButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    // MARK: - Config
     private func config() {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -42,6 +43,7 @@ class ActionButton: UIButton {
 
     }
     
+    // MARK: - Helpers
     func set(background: UIColor, title: String) {
         self.backgroundColor = background
         setTitle(title, for: .normal)

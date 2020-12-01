@@ -22,6 +22,7 @@ struct User: Codable {
     var isAlreadyInFavorite: Bool {
         return FavoritesManager.isUserAlreadyInFavorites(username: username)
     }
+    
     enum CodingKeys: String, CodingKey {
         case username =  "login"
         case avatarUrl

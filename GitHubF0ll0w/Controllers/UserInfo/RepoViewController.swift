@@ -12,11 +12,19 @@ protocol RepoViewControllerDelegate: class {
 }
 
 class RepoViewController: ItemInfoViewController {
+    // MARK: - Properties
+    
     weak var delegate: RepoViewControllerDelegate!
+    
+    // MARK: - View LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureItems()
     }
+    
+    // MARK: - Inits
+    
     init(user: User, delegate: RepoViewControllerDelegate) {
         super.init(nibName: nil, bundle: nil)
         self.user = user
@@ -27,6 +35,8 @@ class RepoViewController: ItemInfoViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Config
+    
     private func configureItems() {
         itemInfoViewOne.set(itemInfoType: .gists, withCount: user.publicGists)
         itemInfoViewTwo.set(itemInfoType: .repos, withCount: user.publicRepos)
@@ -34,10 +44,10 @@ class RepoViewController: ItemInfoViewController {
         actionButton2.set(background: .systemPurple, title: "GitHub Repository")
     }
     
+    // MARK: - Helpers
+    
     override func actionButtonTapped(_ button: UIButton) {
-        
         let type: GithubType = button == actionButton ? .profile : .repos
-        
         delegate.didTapGoToGitHub(for: user,type: type)
     }
     

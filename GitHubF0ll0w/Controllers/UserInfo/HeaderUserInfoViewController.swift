@@ -8,6 +8,7 @@
 import UIKit
 
 class HeaderUserInfoViewController: UIViewController {
+    // MARK: - Properties
     
     let avatarImageView     = AvatarImageView(frame: .zero)
     let usernameLabel       = TitleLabel(textAlignment: .left, fontSize: 34)
@@ -18,6 +19,9 @@ class HeaderUserInfoViewController: UIViewController {
     
     var user: User!
     
+    
+    // MARK: - Inits
+    
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
         self.user = user
@@ -26,6 +30,9 @@ class HeaderUserInfoViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +46,7 @@ class HeaderUserInfoViewController: UIViewController {
         configureUIElements()
     }
     
+    // MARK: - Config
     
     func configureUIElements() {
         avatarImageView.downloadAvatarImage(from: user.avatarUrl)
@@ -51,6 +59,8 @@ class HeaderUserInfoViewController: UIViewController {
         locationImageView.image     = SymbolImages.location
         locationImageView.tintColor = .secondaryLabel
     }
+    
+    // MARK: - Helpers
     
     func layoutUI() {
         let padding: CGFloat = 20

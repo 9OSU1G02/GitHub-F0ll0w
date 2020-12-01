@@ -13,9 +13,9 @@ struct Follow: Codable, Hashable {
     var isAlreadyInFavorite: Bool {
         return FavoritesManager.isUserAlreadyInFavorites(username: username)
         }
+    
     enum CodingKeys: String, CodingKey {
         case username = "login"
         case avatarUrl = "avatar_url"
-        
     }
 }

@@ -20,6 +20,8 @@ class SearchViewController: UIViewController {
     let getFollowingButton = ActionButton(backgroundColor: .systemPurple, title: "Get Following")
     
     var isUserNameEntered: Bool { return !userNameTextFiled.text!.isEmpty}
+    
+    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -41,17 +43,7 @@ class SearchViewController: UIViewController {
         super.viewWillAppear(animated)
         stopListenForKeyboardNotification()
     }
-    
-    private func layoutUI() {
-        
-        view.addSubviews(logo,userNameTextFiled,getFollowersButton,getFollowingButton)
-        
-        configureLogo()
-        configureTextFiled()
-        configureButton()
-        
-    }
-    
+   
     
     // MARK: - Configuration
     
@@ -117,7 +109,7 @@ class SearchViewController: UIViewController {
     }
     
     
-    
+    // MARK: - Notification
     private func listenForKeyboardNotification() {
         addObservsers(selector: #selector(keyboardWillChange(notification:)),
                       names: UIResponder.keyboardWillShowNotification,
@@ -132,7 +124,16 @@ class SearchViewController: UIViewController {
                         UIResponder.keyboardWillChangeFrameNotification,
                         objcect: nil)
     }
+    
     // MARK: - Helpers
+    
+    private func layoutUI() {
+        view.addSubviews(logo,userNameTextFiled,getFollowersButton,getFollowingButton)
+        configureLogo()
+        configureTextFiled()
+        configureButton()
+    }
+    
     
     private func setupDismissKeyBoardTapGesture() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
@@ -172,6 +173,8 @@ class SearchViewController: UIViewController {
     }
     
 }
+
+// MARK: - Extension
 
 extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

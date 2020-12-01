@@ -13,11 +13,12 @@ enum ItemInfoType {
 
 class ItemInfoView: UIView {
     
+    // MARK: - Properties
     let symbolImageView = UIImageView()
     let titleLabel = TitleLabel(textAlignment: .left, fontSize: 14)
     let countLabel = TitleLabel(textAlignment: .center, fontSize: 14)
     
-    // MARK: - View Lifecyle
+    // MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -26,6 +27,8 @@ class ItemInfoView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Helpers
     
     private func configure() {
         
@@ -56,6 +59,8 @@ class ItemInfoView: UIView {
             
         ])
     }
+    
+    // MARK: - Helpers
     
     func set(itemInfoType: ItemInfoType, withCount count:Int) {
         

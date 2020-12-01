@@ -8,7 +8,9 @@
 import UIKit
 
 class AlertViewController: UIViewController {
-
+    
+    // MARK: - Properties
+    
     let containerView = AlertContainerView()
     let titleLabel = TitleLabel(textAlignment: .center, fontSize: 20)
     let messageLabel = BodyLabel(textAlignment: .center)
@@ -18,7 +20,9 @@ class AlertViewController: UIViewController {
     var buttonTitle: String?
     let padding: CGFloat = 20
     
+    
     // MARK: - View Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // 75% of black color
@@ -30,6 +34,7 @@ class AlertViewController: UIViewController {
     }
     
     // MARK: - Inits
+
     init(title: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.alertTitle = title
@@ -37,11 +42,14 @@ class AlertViewController: UIViewController {
         self.message = message
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // MARK: - Configuration
+
     func configureContainerView() {
         view.addSubview(containerView)
         containerView.addSubviews(titleLabel, actionButton, messageLabel)
@@ -53,6 +61,7 @@ class AlertViewController: UIViewController {
         ])
     }
     
+    
     func configureTitleLabel() {
         titleLabel.text = alertTitle ?? "Something went wrong"
         NSLayoutConstraint.activate([
@@ -62,6 +71,7 @@ class AlertViewController: UIViewController {
             titleLabel.heightAnchor.constraint(equalToConstant: 28)
         ])
     }
+    
     
     func configureButtonLabel() {
         actionButton.setTitle(buttonTitle ?? "OK", for: .normal)
@@ -73,7 +83,6 @@ class AlertViewController: UIViewController {
             actionButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
-    
     
     
     func configureMessageLabel() {

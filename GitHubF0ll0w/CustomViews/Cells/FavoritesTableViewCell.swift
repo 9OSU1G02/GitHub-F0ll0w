@@ -14,6 +14,7 @@ class FavoritesTableViewCell: UITableViewCell {
     let usernameLabel = TitleLabel(textAlignment: .left, fontSize: 26)
     let avatarImageView = AvatarImageView(frame: .zero)
     
+    // MARK: - Inits
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
@@ -23,16 +24,7 @@ class FavoritesTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(favorite: Follow) {
-        usernameLabel.text = favorite.username
-        NetworkManager.shared.downloadImage(from: favorite.avatarUrl) { [weak self](image) in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.avatarImageView.image = image
-            }
-        }
-    }
-    
+    // MARK: - Config
     private func configure() {
         addSubviews(usernameLabel,avatarImageView)
         accessoryType = .disclosureIndicator
@@ -49,4 +41,16 @@ class FavoritesTableViewCell: UITableViewCell {
             usernameLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
+    
+    // MARK: - Helpers
+    func set(favorite: Follow) {
+        usernameLabel.text = favorite.username
+        NetworkManager.shared.downloadImage(from: favorite.avatarUrl) { [weak self](image) in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.avatarImageView.image = image
+            }
+        }
+    }
+    
 }

@@ -13,8 +13,8 @@ class FollowListViewController: DataLoadingViewController {
     enum Section {
         case main
     }
-    // MARK: - Properties
     
+    // MARK: - Properties
     
     var type: FollowType!
     var follows: [Follow] = []
@@ -115,6 +115,9 @@ class FollowListViewController: DataLoadingViewController {
     func configureBarButtonItem() {
         navigationItem.rightBarButtonItem = BookmarkBarButtonItem(for: username, in: self)
     }
+   
+    
+    // MARK: - Helpers
     
     func updateData(on follows: [Follow]) {
         
@@ -128,8 +131,6 @@ class FollowListViewController: DataLoadingViewController {
         
     }
     
-    
-    // MARK: - Helpers
     func getFollow(type: FollowType, pageNumber: Int) {
         
         showLoadingView()
@@ -172,6 +173,7 @@ class FollowListViewController: DataLoadingViewController {
         
     }
     
+    
     func updateDataWithFilteredFollows() {
         filteredFollows = follows.filter({ (follow) -> Bool in
             follow.username.lowercased().contains(filterd.lowercased())
@@ -192,6 +194,7 @@ extension FollowListViewController: UICollectionViewDelegate {
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
         let offsetY = scrollView.contentOffset.y
@@ -206,6 +209,7 @@ extension FollowListViewController: UICollectionViewDelegate {
     }
     
 }
+
 
 extension FollowListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
@@ -226,7 +230,9 @@ extension FollowListViewController: UISearchResultsUpdating {
     
 }
 
+
 extension FollowListViewController: UserInfoViewControllerDelegate {
+    
     func didRequestFollow(for username: String, followType: FollowType) {
         
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)

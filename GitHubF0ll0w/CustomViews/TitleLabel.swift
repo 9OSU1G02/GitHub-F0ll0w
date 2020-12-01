@@ -9,6 +9,7 @@ import UIKit
 
 class TitleLabel: UILabel {
     
+    // MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -29,6 +30,7 @@ class TitleLabel: UILabel {
     }
     
     
+    // MARK: - Config
     private func configure() {
 
         translatesAutoresizingMaskIntoConstraints = false

@@ -34,6 +34,7 @@ extension UIView {
     
 }
 
+// MARK: - UIViewController
 extension UIViewController {
     
     func addObservsers(selector: Selector,names: NSNotification.Name..., objcect: Any?) {
@@ -66,6 +67,7 @@ extension UIViewController {
     }
 }
 
+// MARK: - Date
 extension Date {
     func convertToMonthYearFormat() -> String {
         let dateFormatter = DateFormatter()
@@ -76,7 +78,7 @@ extension Date {
     }
 }
 
-
+// MARK: - UITableView
 extension UITableView {
     //Remove blank row in table view
     func removeExcessCells() {
