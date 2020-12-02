@@ -54,7 +54,7 @@ class DataLoadingViewController: UIViewController {
     
     func showEmptySateView(with message: String, in view: UIView) {
         let emptyState = EmptyStateView(message: message)
-        emptyState.frame = view.bounds
+        emptyState.frame = view.frame
         view.addSubview(emptyState)
     }
 }

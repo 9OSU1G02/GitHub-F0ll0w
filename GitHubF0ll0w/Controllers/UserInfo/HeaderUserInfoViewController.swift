@@ -50,13 +50,13 @@ class HeaderUserInfoViewController: UIViewController {
     
     func configureUIElements() {
         avatarImageView.downloadAvatarImage(from: user.avatarUrl)
-        usernameLabel.text          = user.username
-        nameLabel.text              = user.name ?? ""
-        locationLabel.text          = user.location ?? "No Location"
-        bioLabel.text               = user.bio ?? "No bio available"
-        bioLabel.numberOfLines      = 3
+        usernameLabel.text = user.username
+        nameLabel.text = user.name ?? ""
+        locationLabel.text = user.location ?? "No Location"
+        bioLabel.text = user.bio ?? "No bio available"
+        bioLabel.numberOfLines = 3
         
-        locationImageView.image     = SymbolImages.location
+        locationImageView.image = SymbolImages.location
         locationImageView.tintColor = .secondaryLabel
     }
     

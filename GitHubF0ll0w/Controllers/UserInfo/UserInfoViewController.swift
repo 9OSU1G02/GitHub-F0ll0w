@@ -65,7 +65,7 @@ class UserInfoViewController: DataLoadingViewController {
         scrollView.pinToEdge(of: view)
         contentView.pinToEdge(of: scrollView)
         
-        
+        //ContentView need specified size event we had pinToEdge of scrollView
         NSLayoutConstraint.activate([
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(equalToConstant: 600)

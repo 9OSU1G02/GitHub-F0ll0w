@@ -25,6 +25,7 @@ class NetworkManager {
     
     private let baseURL = "https://api.github.com/users/"
     
+    //key: url of image, key : UIImage , cache work just like user default
     let cache = NSCache<NSString,UIImage>()
     
     
@@ -119,6 +120,7 @@ class NetworkManager {
     func downloadImage(from url: String, completion: @escaping (UIImage?) -> Void) {
         
         let cacheKey = NSString(string: url)
+        //if image already in cache
         if let image = cache.object(forKey: cacheKey) {
             completion(image)
             return

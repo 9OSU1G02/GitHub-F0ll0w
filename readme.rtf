@@ -1,0 +1,442 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Monaco;\f2\fnil\fcharset0 Menlo-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red93\green216\blue255;
+\red31\green31\blue36;\red255\green255\blue255;\red65\green161\blue192;\red103\green183\blue164;\red255\green255\blue255;
+\red161\green103\blue230;\red161\green103\blue230;\red208\green191\blue105;\red252\green95\blue163;\red158\green241\blue221;
+\red158\green241\blue221;\red208\green168\blue255;\red103\green183\blue164;\red208\green168\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c1\c1;\cssrgb\c100000\c100000\c99985\c0;\csgenericrgb\c36295\c84643\c99897;
+\csgenericrgb\c12054\c12284\c14131;\cssrgb\c100000\c100000\c99971\c0;\csgenericrgb\c25490\c63137\c75294;\csgenericrgb\c40392\c71765\c64314;\csgenericrgb\c100000\c100000\c100000\c85000;
+\csgenericrgb\c63232\c40219\c90115;\csgenericrgb\c63137\c40392\c90196;\csgenericrgb\c81498\c74939\c41233;\csgenericrgb\c98839\c37355\c63833;\csgenericrgb\c61961\c94510\c86667;
+\csgenericrgb\c62145\c94386\c86819;\csgenericrgb\c81681\c65692\c99927;\csgenericrgb\c40538\c71705\c64209;\csgenericrgb\c81569\c65882\c100000;}
+\margl1440\margr1440\vieww26820\viewh13640\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 --------------------------------------------------------------\cf4 \cb5 SearchViewController\cf0 \cb1 \
+\cf2 \cb6 \
+\cf7 \cb5 setupDismissKeyBoardTapGesture\cf0 \cb1  : T\uc0\u7841 o gest
+\f1 ure v\'e0 add v\'e0o view \uc0\u273 \u7875  khi \u7845 n v\'e0o b\u7845 t k\u7923  \u273 \'e2u tr\'ean screen s\u7869  dismiss keyboard\
+\
+\
+
+\f0 \cf7 \cb5 listenForKeyboardNotification\cf0 \cb1  : L
+\f1 \uc0\u7855 
+\f0 ng nghe c\'e1c th\'f4i b\'e1o c
+\f1 \uc0\u7911 
+\f0 a keybo
+\f1 ard,
+\f0  khi keybo
+\f1 ard xu\uc0\u7845 t hi\u7879 n s\u7869  g\u7885 i 
+\f0 \cf8 \cb5 keyboardWillChange\cf9 (notification\cf0 \cb1  : Khi c\'f3 c\'e1c th\'f4ng b\'e1o \cf10 \cb5 keyboardWillShowNotification\cf0 \cb1  ho\uc0\u7863 c \cf10 \cb5 keyboardWillChangeFrameNotification\cf0 \cb1  t\uc0\u7913 c l\'e0 keybo
+\f1 ard xu\uc0\u7845 t hi\u7879 n -> 
+\f0 \cf10 \cb5 view\cf9 .\cf10 frame\cf9 .\cf10 origin\cf9 .\cf10 y\cf9  = \cf11 -\cf9 keyboardSize.\cf10 height
+\f1 \cf0 \cb1  s\uc0\u7869  n\'e2ng view l\'ean th\'eam b\u7857 ng \u273 \'fang chi\u7873 u cao c\u7911 a keyboard , n\u7871 u l\'e0 c\'e1c th\'f4ng b\'e1o kh\'e1c -> 
+\f0 \cf10 \cb5 view\cf9 .\cf10 frame\cf9 .\cf10 origin\cf9 .\cf10 y\cf9  = \cf12 0\cf0 \cb1  \uc0\u273 \u432 a view v
+\f1 \uc0\u7873 
+\f0  v\uc0\u7883  tr\'ed ban \u273 
+\f1 \uc0\u7847 
+\f0 u\
+\
+\cf8 \cb5 stopListenForKeyboardNotification\cf0 \cb1  : D\uc0\u7915 ng l
+\f1 \uc0\u7855 
+\f0 ng nghe c\'e1c th\'f4ng b\'e1o c
+\f1 \uc0\u7911 
+\f0 a keybo
+\f1 ard b\uc0\u7857 ng c\'e1ch xo\'e1 h\u7871 t c\'e1c observer \u273 ang l\u7855 ng nghe th\'f4ng b\'e1o\
+\
+
+\f0 \cf7 \cb5 pushFollowCollectionVC\cf9 (
+\f2\b \cf13 _
+\f0\b0 \cf9  button\cf0 \cb1  : N
+\f1 \uc0\u7871 
+\f0 u use ch\uc0\u7885 n button m\'e0 text field tr
+\f1 \uc0\u7889 
+\f0 ng s\uc0\u7869  hi\u7879 n \cf8 \cb5 presentAlertOnMainThread\cf0 \cb1  , khi ch\uc0\u7885 n button s\u7869  kh
+\f1 \uc0\u7903 
+\f0 i t\uc0\u7841 o \cf14 \cb5 FollowListViewController\cf0 \cb1  v\uc0\u7899 i us
+\f1 ername l\'e0 text trong text file , type th\'ec tu\uc0\u7923  thu\u7897 t v\'e0o button m\'e0 user \u273 \'e3 ch\u7885 n -> push 
+\f0 \cf14 \cb5 FollowListViewController\cf0 \cb1  v\uc0\u7915 a t\u7841 o\
+\
+\
+\
+\
+\
+\
+\cf2 \cb3 --------------------------------------------------------------\cf4 \cb5 FollowListViewController\cf0 \cb1 \
+\
+\cf7 \cb5 configureCollectionView\cf0 \cb1  : t\uc0\u7841 o collectionView v\u7899 i flowlayout \u273 
+\f1 \uc0\u7911 
+\f0  ch\uc0\u432 a 3 item t
+\f1 rong 1 row, bi\uc0\u7871 n 
+\f0 collectionView v\uc0\u7915 a t\u7841 o th\'e0nh subView\
+\
+\cf7 \cb5 getFollow\cf9 (type: \cf15 FollowType\cf9 , pageNumber: \cf16 Int\cf9 )\cf0 \cb1  : \cf8 \cb5 showLoadingView\cf9 ()\cf0 \cb1  , \cf17 \cb5 isLoading\cf9  = 
+\f2\b \cf13 true
+\f0\b0 \cf0 \cb1  ngh\uc0\u297 a l\'e0 \u273 ang trong tr\u7841 ng th\'e1i load follow, \cf14 \cb5 NetworkManager\cf9 .\cf17 shared\cf9 .\cf8 getFollow\cf0 \cb1  tr
+\f1 \uc0\u7843 
+\f0  v
+\f1 \uc0\u7873 
+\f0  [Follow] tu\uc0\u7923  v\'e0o type \u273 \u432 \u7907 c truy
+\f1 \uc0\u7873 
+\f0 n khi init , n
+\f1 \uc0\u7871 
+\f0 u
+\f1  tr\uc0\u7843  v\u7873  error th\'ec 
+\f0 \cf8 \cb5 presentAlertOnMainThread\cf9 (title\cf0 \cb1  , n
+\f1 \uc0\u7871 
+\f0 u t
+\f1 r\uc0\u7843  v\u7873 
+\f0  [Follow] -> \cf8 \cb5 dismissLoadingView\cf9 ()\cf0 \cb1  -> 
+\f2\b \cf13 \cb5 self
+\f0\b0 \cf9 .\cf17 isLoading\cf9  = 
+\f2\b \cf13 false
+\f0\b0 \cf0 \cb1  -> \cf8 \cb5 updateUI\cf9 (with: follows)\cf0 \cb1  : truy
+\f1 \uc0\u7873 
+\f0 n [Follow] v\uc0\u7915 a t
+\f1 \uc0\u7843 
+\f0 i v
+\f1 \uc0\u7873 
+\f0  v\'e0o , n
+\f1 \uc0\u7871 
+\f0 u ph
+\f1 \uc0\u7847 
+\f0 n t
+\f1 \uc0\u7917 
+\f0  < 100 th\'ec \cf17 \cb5 hasMoreFollowers\cf9  = 
+\f2\b \cf13 false
+\f0\b0 \cf9  \cf0 \cb1  ngh\uc0\u297 a l\'e0 kh\'f4ng c\'f3 th\'eam follow \u273 
+\f1 \uc0\u7875  t\u7843 i n\u7919 a , append 
+\f0 Follow] v\uc0\u7915 a t
+\f1 \uc0\u7843 
+\f0 i v
+\f1 \uc0\u7873  v\'e0o 
+\f0 \cf17 \cb5 follows\cf0 \cb1  , n
+\f1 \uc0\u7871 
+\f0 u \cf17 \cb5 follows\cf0 \cb1  empty th\'ec \cf8 \cb5 showEmptySateView\cf0 \cb1  , n
+\f1 \uc0\u7871 
+\f0 u c\'f3 ph
+\f1 \uc0\u7847 
+\f0 n t\uc0\u7915  th\'ec tu\u7923  \cf17 \cb5 isSearching\cf0 \cb1  l\'e0 true hay false, n
+\f1 \uc0\u7871 
+\f0 u true th\'ec \cf8 \cb5 updateDataWithFilteredFollows\cf9 ()\cf0 \cb1  : d\'f9ng \cf17 \cb5 filteredFollows\cf0 \cb1  \uc0\u273 
+\f1 \uc0\u7875 
+\f0  l\'e0m dataSo
+\f1 urce , n\uc0\u7871 u l\'e0 false th\'ec d\'f9ng 
+\f0 \cf17 \cb5 follows\cf0 \cb1  l\'e0m d
+\f1 atasource -> 
+\f0 \cf7 \cb5 updateData\cf9 (on follows\cf0 \cb1  : t\uc0\u7841 o snapshot b\u7857 ng [Follow] \u273 \u432 \u7907 c truy
+\f1 \uc0\u7873 
+\f0 n v\'e0o v\'e0 apply snapshot\
+\
+\
+\cf7 \cb5 configureBarButtonItem\cf0 \cb1  : T\uc0\u7841 o b
+\f1 arbutton b\uc0\u7857 ng 
+\f0 \cf14 \cb5 BookmarkBarButtonItem\cf9 (for: \cf17 username\cf9 , in: 
+\f2\b \cf13 self
+\f0\b0 \cf9 )\cf0 \cb1  truy
+\f1 \uc0\u7873 
+\f0 n usename v\'e0 self (\cf4 \cb5 FollowListViewController\cf0 \cb1  ) -> \cf7 \cb5 configureBarButtonItem\cf9 ()\cf0 \cb1  tu\uc0\u7923  v\'e0o us
+\f1 ername \uc0\u273 \'f3 \u273 \'e3 t\u7891 n t\u7841 i trong favorites \u7903  user default hay ch\u432 a m\'e0 set image
+\f0 \
+\
+Khi us
+\f1 er \uc0\u7845 n v\'e0o v\'e0o barbutton -> 
+\f0 \cf14 \cb5 NetworkManager\cf9 .\cf17 shared\cf9 .\cf8 getUserInfo\cf9 (for: \cf17 username\cf9 )\cf0 \cb1  s\uc0\u7869  tr
+\f1 \uc0\u7843 
+\f0  v
+\f1 \uc0\u7873 
+\f0  Us
+\f1 er v\uc0\u7899 i username \u273 \u432 \u7907 c truy\u7873 n v\'e0o, check xem username c\u7911 a user \u273 \'f3 \u273 \'e3 t\u7891 n t\u7841 i trong favorites \u7903  user default hay ch\u432 a, n\u7871 u ch\u432 a th\'ec l\'e0 action l\'e0 add c\'f2n n\u7871 u r\u7891 i th\'ec l\'e0 remove -> 
+\f0 \cf7 \cb5 editUserWithFavorites\cf9 (user: \cf15 User\cf9 , actionType: \cf15 FavoritesActionType\cf9 )\cf0 \cb1  : truy
+\f1 \uc0\u7873 
+\f0 n Us
+\f1 er v\'e0 action v\'e0o -> t\uc0\u7841 o Follow t\u7915  User \u273 \u432 \u7907 c truy\u7873 n v\'e0o -> 
+\f0 \cf15 \cb5 FavoritesManager\cf9 .\cf8 updateWith\cf0 \cb1  : truy
+\f1 \uc0\u7873 
+\f0 n Follow v\'e0 action v\'e0o -> \cf8 \cb5 retrieveFavorites\cf0 \cb1  : t
+\f1 r\uc0\u7843  v\u7873  [Follow] t\u7915  userDefault -> n\u7871 u action l\'e0 add th\'ec check xem Follow \u273 \'f3 \u273 \'e3 t\u7891 n t\u7841 i trong [Follow] v\u7915 a \u273 \u432 \u7907 c tr\u7843  v\u7873  t\u7915  userDefault hay ch\u432 a, n\u7871 u ch\u432 a th\'ec append v\'e0o, action l\'e0 remove th\'ec remove ph\u7847 n t\u7915  trong [Follow] m\'e0 tr\'f9ng 
+\f0 \cf17 \cb5 username\cf0 \cb1  v\uc0\u7899 i Follow \u273 \u432 \u7907 c truy
+\f1 \uc0\u7873 
+\f0 n v\'e0o b\'ean tr\'ean -> \cf7 \cb5 save\cf9 (favorites\cf0 \cb1  : l\uc0\u432 u [Follow] v\u7915 a \u273 \u432 \u7907 c add ho\u7863 c remove v\u7915 a r
+\f1 \uc0\u7891 
+\f0 i v\'e0o 
+\f1 userDefault -> 
+\f0 \cf18 \cb5 NotificationCenter\cf9 .\cf10 default\cf9 .\cf11 post\cf9 (name: \cf16 Notification\cf9 .\cf16 Name\cf9 (\cf17 FAVORITES_CHANGE_NOTIFICATION\cf9 ), object: 
+\f2\b \cf13 nil
+\f0\b0 \cf9 )\cf0 \cb1  : g
+\f1 \uc0\u7917 
+\f0 i th\'f4ng b\'e1o l\'e0 \uc0\u273 \'e3 v\u7915 a l\u432 u [Follow] v\'e0o us
+\f1 erDefault
+\f0 , ng\uc0\u432 \u7901 i nh\u7853 n l\'e0 \cf4 \cb5 UserInfoViewController\cf0 \cb1  \uc0\u273 
+\f1 \uc0\u7875 
+\f0  config l\uc0\u7841 i b
+\f1 arbutton cho ph\'f9 h\uc0\u7907 p\
+\
+
+\f0 \cf7 \cb5 updateSearchResults\cf9 (\cf0 \cb1  : Khi kh\'f4ng c\'f3 text trong se
+\f1 arch bar -> xo\'e1 h\uc0\u7871 t ph\u7847 n t\u7917  c\u7911 a m\u7843 ng 
+\f0 \cf17 \cb5 filteredFollows\cf0 \cb1  ,\cf17 \cb5 isSearching\cf9  = 
+\f2\b \cf13 false
+\f0\b0 \cf0 \cb1  ,g\uc0\u7885 i \cf8 \cb5 updateData\cf9 ( \cf0 \cb1  v\'e0 truy
+\f1 \uc0\u7873 
+\f0 n m
+\f1 \uc0\u7843 
+\f0 ng \cf17 \cb5 follows\cf0 \cb1  v\'e0o ( m
+\f1 \uc0\u7843 
+\f0 ng c\'f3 t
+\f1 \uc0\u7845 
+\f0 t c
+\f1 \uc0\u7843 
+\f0  c\'e1c ph
+\f1 \uc0\u7847 
+\f0 n t
+\f1 \uc0\u7917 ) n\u7871 u c\'f3 text trong search bar -> 
+\f0 \cf17 \cb5 isSearching\cf9  = 
+\f2\b \cf13 true
+\f0\b0 \cf0 \cb1  ,g
+\f1 \uc0\u7855 
+\f0 n text trong se
+\f1 arch bar cho 
+\f0 \cf17 \cb5 filterd\cf0 \cb1  -> \cf7 \cb5 updateDataWithFilteredFollows\cf9 ()\cf0 \cb1  : l
+\f1 \uc0\u7845 
+\f0 y c\'e1c ph
+\f1 \uc0\u7847 
+\f0 n t
+\f1 \uc0\u7917 
+\f0  c
+\f1 \uc0\u7911 
+\f0 a \cf17 \cb5 follows\cf0 \cb1  m\'e0 c\'f3 \cf17 \cb5 username\cf0 \cb1  ch
+\f1 \uc0\u7917 
+\f0 a text trong se
+\f1 arch bar r\uc0\u7891 i g\u7855 n c\'e1c ph\u7847 n t\u7917  \u273 \'f3 cho 
+\f0 \cf17 \cb5 filteredFollows\cf0 \cb1  -> \cf8 \cb5 updateData\cf9 (on: \cf17 filteredFollows\cf0 \cb1  \
+\
+\cf7 \cb5 scrollViewDidEndDragging\cf0 \cb1  : Khi us
+\f1 er scroll v\'e0 th\uc0\u7843  ra n\u7871 u 
+\f0 \cf9 \cb5 offsetY \cf11 >\cf9  contentHeight \cf11 -\cf9  heightOfScrollView\cf0 \cb1  ngh\uc0\u297  l\'e0 us
+\f1 er \uc0\u273 \'e3 scroll xu\u7889 ng bottom v\'e0 v\u7851 n scroll ti\u7871 p , 
+\f0 \cf17 \cb5 hasMoreFollowers\cf0 \cb1  m\'e0 v
+\f1 \uc0\u7851 
+\f0 n c\'f2n follow
+\f1  \uc0\u273 \u7875  load , v\'e0 \u273 ang kh\'f4ng trong tr\u7841 ng th\'e1i load follow 
+\f0 \cf11 \cb5 !\cf17 isLoading\cf0 \cb1  -> t\uc0\u259 ng \cf17 \cb5 pageNumber\cf0 \cb1  th\'eam 1 -> \cf8 \cb5 getFollow\cf9 (type: \cf17 type\cf9 , pageNumber: \cf17 pageNumber\cf9 )\cf0 \cb1  : get follow v\uc0\u7899 i type hi\u7879 n t\u7841 i v\'e0 page numb
+\f1 er v\uc0\u7915 a t\u259 ng\
+\
+
+\f0 \cf9 \cb5 didSelectItemAt\cf0 \cb1  : t\uc0\u7841 o \cf14 \cb5 UserInfoViewController\cf0 \cb1  , l
+\f1 \uc0\u7845 
+\f0 y us
+\f1 ername c\uc0\u7911 a item \u273 \u432 \u7907 c ch\u7885 n g\u7855 n cho username c\u7911 a 
+\f0 \cf14 \cb5 UserInfoViewController\cf0 \cb1  v\uc0\u7915 a t\u7841 o, v\'e0 set delegate c
+\f1 \uc0\u7911 a 
+\f0 \cf14 \cb5 UserInfoViewController t\cf0 \cb1  l\'e0 ch\'ednh m\'ecnh
+\f1 \
+\
+
+\f0 \cf2 \cb3 --------------------------------------------------------------\cf4 \cb5 UserInfoViewController\cf0 \cb1 \
+\
+\cf7 \cb5 scrollView\cf0 \cb1  l\'e0 subview c
+\f1 \uc0\u7911 
+\f0 a view thu\uc0\u7897 c \cf4 \cb5 UserInfoViewController\cf0 \cb1  c\'f3 k\'edch th\uc0\u432 \u7899 c b\u7857 ng v\u7899 i view c
+\f1 \uc0\u7911 
+\f0 a \cf4 \cb5 UserInfoViewController\cf0 \cb1  ,b\'ean trong ch\uc0\u7913 a \cf7 \cb5 contentView\cf0 \cb1  chi
+\f1 \uc0\u7873 
+\f0 u r\uc0\u7897 ng b\u7857 ng chi
+\f1 \uc0\u7873 
+\f0 u r\uc0\u7897 ng c
+\f1 \uc0\u7911 
+\f0 a \cf7 \cb5 scrollView \cf0 \cb1  chi
+\f1 \uc0\u7873 
+\f0 u cao l\'e0 600 \
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Kh
+\f1 \uc0\u7903 
+\f0 i t\uc0\u7841 o \cf4 \cb5 HeaderUserInfoViewController\cf0 \cb1  , \cf4 \cb5 RepoViewController\cf0 \cb1  , \cf4 \cb5 RepoViewController\cf0 \cb1  v\'e0 truy
+\f1 \uc0\u7873 
+\f0 n Us
+\f1 er v\'e0o, d\'f9ng c\'e1c th\'f4ng tin c\uc0\u7911 a User \u273 \'f3 \u273 \u7875  hi\u7875 n th\u7883 ,
+\f0  sau khi kh
+\f1 \uc0\u7903 
+\f0 i t\uc0\u7841 o \u273 
+\f1 \uc0\u7873 
+\f0 u \uc0\u273 \u432 \u7907 c set l\'e0 child c
+\f1 \uc0\u7911 
+\f0 a \cf4 \cb5 UserInfoViewController\cf0 \cb1  v\'e0 delegate c
+\f1 \uc0\u7911 
+\f0 a ch\'fang c\uc0\u361 ng l\'e0 \cf4 \cb5 UserInfoViewController\cf0 \cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+=======B
+\f1 \uc0\u7889 
+\f0  c\uc0\u7909 c G
+\f1 \uc0\u7891 
+\f0 m 5 ph
+\f1 \uc0\u7847 
+\f0 n ch\'ednh :\
+\
+Barbutton
+\f1  : Ch\uc0\u7913 c n\u259 ng y h\u7879 t barbutton trong 
+\f0 \cf4 \cb5 FollowListViewController\cf0 \cb1 \
+\
+\cf7 \cb5 headerView\cf0 \cb1  : ch\uc0\u7913 a view c
+\f1 \uc0\u7911 
+\f0 a \cf4 \cb5 HeaderUserInfoViewController\cf0 \cb1  \
+\
+\cf7 \cb5 itemViewOne\cf0 \cb1  : ch\uc0\u7913 a view c
+\f1 \uc0\u7911 
+\f0 a \cf4 \cb5 RepoViewController\cf0 \cb1  \
+\
+\cf7 \cb5 itemViewTwo\cf0 \cb1  : ch\uc0\u7913 a view c
+\f1 \uc0\u7911 
+\f0 a \cf4 \cb5 FollowItemViewController\cf0 \cb1  \
+\
+\cf7 \cb5 dateLabel\cf0 \cb1  \
+\
+\
+\cf17 \cb5 itemViews\cf0 \cb1  ch\uc0\u7913 a 4 ph
+\f1 \uc0\u7847 
+\f0 n ch\'ednh tr\uc0\u7915  Barbutton , \cf7 \cb5 contentView\cf0 \cb1  ch\uc0\u7913 a \cf17 \cb5 itemViews\cf0 \cb1  , 4 ph
+\f1 \uc0\u7847 
+\f0 n ch\'ednh kia \uc0\u273 
+\f1 \uc0\u7873 u
+\f0  c\'f3 chi
+\f1 \uc0\u7873 
+\f0 u r\uc0\u7897 ng b\u7857 ng v\u7899 i chi
+\f1 \uc0\u7873 
+\f0 u r\uc0\u7897 ng c
+\f1 \uc0\u7911 
+\f0 a \cf7 \cb5 contentView\cf0 \cb1  , c\'f2n chi
+\f1 \uc0\u7873 
+\f0 u cao th\'ec set b\uc0\u7857 ng const
+\f1 ant
+\f0 \
+\
+View c
+\f1 \uc0\u7911 
+\f0 a \cf4 \cb5 HeaderUserInfoViewController\cf0 \cb1  , \cf4 \cb5 RepoViewController\cf0 \cb1  , \cf4 \cb5 FollowItemViewController\cf0 \cb1  \uc0\u273 
+\f1 \uc0\u7873 
+\f0 u c\'f3 k\'edch th\uc0\u432 \u7899 c b\u7857 ng v\u7899 i k\'edch th\u432 \u7899 c view ch\u432 a n\'f3 (\cf7 \cb5 headerView , itemViewOne, itemViewTwo\cf0 \cb1  )\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Khi us
+\f1 er ch\uc0\u7885 n button githubProfile ho\u7863 c Github Repository -> 
+\f0 \cf4 \cb5 RepoViewController\cf0 \cb1  :
+\f1  
+\f0 \cf7 \cb5 actionButtonTapped\cf9 (
+\f2\b \cf13 _
+\f0\b0 \cf9  button\cf0 \cb1  tu\uc0\u7923  thu
+\f1 \uc0\u7897 c v\'e0o button m\'e0 user ch\u7885 n \u273 \u7875  l\u7845 y ra type c\u7911 a 
+\f0 \cf4 \cb5 GithubType\cf0 \cb1  -> \cf17 \cb5 delegate\cf9 \cb5 .\cf8 \cb5 didTapGoToGitHub\cf9 \cb5 (for: \cf17 \cb5 user\cf9 \cb5 ,type: type)\cf0 \cb1  -> truy
+\f1 \uc0\u7873 
+\f0 n Us
+\f1 er v\'e0 type v\'e0o, delegate (
+\f0 \cf14 \cb5 UserInfoViewController\cf0 \cb1  )
+\f1  t\uc0\u7841 o ra url v\u7899 i User v\'e0 type v\u7915 a \u273 \u432 \u7907 c truy\u7873 n v\'e0o -> 
+\f0 \cf8 \cb5 presentSafariVC\cf9 \cb5 (url: url)\cf0 \cb1  : present saf
+\f1 ari v\uc0\u7899 i url v\u7915 a t\u7841 o
+\f0  
+\f1  
+\f0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Khi us
+\f1 er ch\uc0\u7885 n button Get Followers ho\u7863 c get Following -> 
+\f0 \cf4 \cb5 FollowItemViewController\cf0 \cb1  : \cf7 \cb5 actionButtonTapped\cf9 (
+\f2\b \cf13 _
+\f0\b0 \cf9  button\cf0 \cb1  tu\uc0\u7923  thu
+\f1 \uc0\u7897 c v\'e0o button m\'e0 user ch\u7885 n \u273 \u7875  l\u7845 y ra type c\u7911 a 
+\f0 \cf4 \cb5 FollowType\cf0 \cb1  -> \cf17 \cb5 delegate\cf9 \cb5 .\cf8 \cb5 didTapGetFollow\cf9 \cb5 (for: \cf17 \cb5 user\cf9 \cb5 , type: type)\cf0 \cb1  truy
+\f1 \uc0\u7873 
+\f0 n Us
+\f1 er v\'e0 type v\'e0o , delegate (
+\f0 \cf14 \cb5 UserInfoViewController\cf0 \cb1  ) check xem 
+\f1 s\uc0\u7889  follower h\u417 \u7863 c following 
+\f0 c
+\f1 \uc0\u7911 
+\f0 a Us
+\f1 er \uc0\u273 \'f3 ( tu\u7923  thu\u7897 c v\'e0o type ch\u7885 n b\'ean tr\'ean ), n\u7871 u l\u7899 n h\u417 n 0 th\'ec -> 
+\f0 \cf7 \cb5 dismissVC\cf9 ()\cf0 \cb1  : pop \cf4 \cb5 UserInfoViewController\cf0 \cb1  -> \cf17 \cb5 delegate\cf9 \cb5 .\cf8 \cb5 didRequestFollow\cf9 \cb5 (for: user.\cf17 \cb5 username\cf9 \cb5 , followType: type)\cf0 \cb1  : truy
+\f1 \uc0\u7873 
+\f0 n Us
+\f1 er v\'e0 type v\'e0o, delegate (
+\f0 \cf14 \cb5 FollowListViewController\cf0 \cb1  ) \uc0\u273 \u432 a t
+\f1 \uc0\u7845 
+\f0 t c
+\f1 \uc0\u7843 
+\f0  th\'f4ng s
+\f1 \uc0\u7889 
+\f0  v
+\f1 \uc0\u7873 
+\f0  ban \uc0\u273 
+\f1 \uc0\u7847 
+\f0 u, d\'f9ng th\'f4ng tin c
+\f1 \uc0\u7911 
+\f0 a \cf9 \cb5 user.\cf17 \cb5 username\cf0 \cb1  \uc0\u273 
+\f1 \uc0\u7875 
+\f0  hi
+\f1 \uc0\u7875 
+\f0 n th\uc0\u7883  v\'e0 type \u273 \u432 \u7907 c truy
+\f1 \uc0\u7873 
+\f0 n v\'e0o \uc0\u273 
+\f1 \uc0\u7875 
+\f0  \cf8 \cb5 getFollow\cf9 \cb5 (type: \cf17 \cb5 type\cf9 \cb5 , pageNumber: \cf17 \cb5 pageNumber\cf9 \cb5 )\cf0 \cb1 \
+\
+\
+\cf2 \cb3 --------------------------------------------------------------\cf4 \cb5 FavoritesListViewController\cf0 \cb1 \
+\
+\cf7 \cb5 configureTableView\cf0 \cb1  : t\uc0\u7841 o tableView v\'e0 bi
+\f1 \uc0\u7871 
+\f0 n n\'f3 th\'e0nh subview c
+\f1 \uc0\u7911 
+\f0 a view thu\uc0\u7897 c \cf4 \cb5 FavoritesListViewController\cf0 \cb1  \
+\
+tableView d\'f9ng [Follow] t\uc0\u7915  trong us
+\f1 er default ra
+\f0  l\'e0m dataSo
+\f1 urce 
+\f0 \
+\
+\cf7 \cb5 getFovorites\cf9 ()\cf0 \cb1  : l
+\f1 \uc0\u7845 
+\f0 y t
+\f1 \uc0\u7845 
+\f0 t [Follow] t\uc0\u7915  trong us
+\f1 er default ra -> 
+\f0 \cf8 \cb5 updateUI\cf9 \cb5 (with: favorites)\cf0 \cb1  : truy
+\f1 \uc0\u7873 
+\f0 n [Follow] v\uc0\u7915 a l
+\f1 \uc0\u7845 
+\f0 y ra , n
+\f1 \uc0\u7871 
+\f0 u [Follow] empty th\'ec \cf8 \cb5 showEmptySateView\cf0 \cb1  , n
+\f1 \uc0\u7871 
+\f0 u kh\'f4ng th\'ec \uc0\u273 \u432 a tableView l\'ean \u273 
+\f1 \uc0\u7847 
+\f0 u -> raload l\uc0\u7841 i data c
+\f1 \uc0\u7911 
+\f0 a table view\
+\
+\cf9 \cb5 didSelectRowAt\cf0 \cb1  : th\uc0\u7921 c hi\u7879 n gi
+\f1 \uc0\u7889 
+\f0 ng h\uc0\u7879  v\u7899 i \cf9 \cb5 didSelectItemAt\cf0 \cb1  c
+\f1 \uc0\u7911 
+\f0 a \cf4 \cb5 FollowListViewController\cf0 \cb1 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 \cb3 -------------------------------------------------------------\cf4 \cb5 NetworkManager\cf0 \cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\cf7 \cb5 downloadImage\cf9 (from url:\cf0 \cb1  : t\uc0\u7841 o NSString t\u7915  
+\f1 url v\'e0 d\'f9ng n\'f3 th\uc0\u7917  l\u7845 y image t\u7915  cache ra, n\u7871 u l\u7845 y \u273 \u432 \u7907 c th\'ec tr\u7843  v\u7873  image lu\'f4n, n\u7871 u kh\'f4ng l\u7845 y \u273 \u432 \u7907 c th\'ec 
+\f0 \cf18 \cb5 URLSession\cf9 \cb5 .\cf10 \cb5 shared\cf9 \cb5 .\cf11 \cb5 dataTask\cf9 \cb5 (with: url\cf0 \cb1  t
+\f1 \uc0\u7843 
+\f0 i image t\uc0\u7915  
+\f1 url v\uc0\u7873  , l\u432 u v\'e0o cache v\u7899 i key l\'e0 url, tr\u7843  v\u7873  image v\u7915 a t\u7843 i v\u7873 
+\f0 \
+}

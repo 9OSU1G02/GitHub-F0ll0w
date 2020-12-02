@@ -37,6 +37,7 @@ class UsernameTextField: UITextField {
         adjustsFontSizeToFitWidth = true
         minimumFontSize = 12
         
+        keyboardType = .asciiCapable
         placeholder = "Enter a username"
         clearButtonMode = .whileEditing
         backgroundColor = .tertiarySystemBackground

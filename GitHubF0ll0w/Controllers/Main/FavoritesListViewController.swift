@@ -21,7 +21,6 @@ class FavoritesListViewController: DataLoadingViewController {
         super.viewDidLoad()
         configureViewController()
         configureTableView()
-        getFovorites()
     }
     
     override func viewWillAppear(_ animated: Bool) {

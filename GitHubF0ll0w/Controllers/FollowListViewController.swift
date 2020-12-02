@@ -92,11 +92,9 @@ class FollowListViewController: DataLoadingViewController {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: UIHelpers.createThreeColumnFlowLayout(in: view))
         
         collectionView.showsVerticalScrollIndicator = false
-        
+        //  force UICollectionView with fewer items to scroll
         collectionView.alwaysBounceVertical = true
-        
         collectionView.delegate = self
-        
         collectionView.backgroundColor = .systemBackground
         
         view.addSubview(collectionView)
@@ -201,6 +199,7 @@ extension FollowListViewController: UICollectionViewDelegate {
         let contentHeight = scrollView.contentSize.height
         let heightOfScrollView = scrollView.frame.size.height
         
+        //User has scroll to bottom and continue scroll
         if offsetY > contentHeight - heightOfScrollView && hasMoreFollowers  && !isLoading {
             pageNumber += 1
             getFollow(type: type, pageNumber: pageNumber)
